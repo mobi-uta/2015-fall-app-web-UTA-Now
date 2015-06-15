@@ -23,36 +23,27 @@ app.config(function($stateProvider, $urlRouterProvider) {
         templateUrl: "templates/tabs.html"
     })
 
-    .state('tab.dash', {
-        url: '/dash',
+    .state('tab.events', {
+        url: '/events',
         views: {
-            'tab-dash': {
-                templateUrl: 'templates/tab-dash.html',
-                controller: 'DashCtrl'
+            'tab-events': {
+                templateUrl: 'templates/tab-events.html',
+                controller: 'EventsCtrl'
             }
         }
     })
 
-    .state('tab.chats', {
-        url: '/chats',
+    .state('tab.event-detail', {
+        url: '/events/:eventId',
         views: {
-            'tab-chats': {
-                templateUrl: 'templates/tab-chats.html',
-                controller: 'ChatsCtrl'
+            'tab-events': {
+                templateUrl: 'templates/tab-event-detail.html',
+                controller: 'EventDetailCtrl'
             }
         }
     })
 
-    .state('tab.chat-detail', {
-        url: '/chats/:chatId',
-        views: {
-            'tab-chats': {
-                templateUrl: 'templates/chat-detail.html',
-                controller: 'ChatDetailCtrl'
-            }
-        }
-    })
-
+    
     .state('tab.account', {
         url: '/account',
         views: {
@@ -63,6 +54,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
         }
     });
 
-    $urlRouterProvider.otherwise('/tab/dash');
+    $urlRouterProvider.otherwise('/tab/events');
 
 });
