@@ -1,5 +1,17 @@
-var app = angular.module('starter.controllers', []);
-
+var app = angular.module('starter.controllers', ['ngOpenFB']);
+app.controller('AccountCtrl', function ($scope, $ionicModal, $timeout, ngFB) {
+	$scope.fbLogin = function () {
+    ngFB.login({scope: 'email,read_stream,publish_actions'}).then(
+        function (response) {
+            if (response.status === 'connected') {
+                console.log('Facebook login succeeded');
+                $scope.closeLogin();
+            } else {
+                alert('Facebook login failed');
+            }
+        });
+    };
+});
 app.controller('DashCtrl', function($scope) {});
 
 app.controller('EventsCtrl', function($scope, Events) {
@@ -49,11 +61,4 @@ app.controller('EventDetailCtrl', function($scope) {
 
 
 
-app.controller('AccountCtrl', function($scope) {
-	$scope.settings = {
-		enableFriends: true
-	};
 
-})
-
-;
