@@ -26,3 +26,5 @@ app.controller('AccountCtrl', function($scope) {
 		enableFriends: true
 	};
 });
+
+app.controller('EventDetailCtrl', function($scope) {});

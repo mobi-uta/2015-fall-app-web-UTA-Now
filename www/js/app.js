@@ -61,6 +61,16 @@ app.config(function($stateProvider, $urlRouterProvider) {
                 controller: 'AccountCtrl'
             }
         }
+    })
+
+    .state('tab.event-detail', {
+        url: '/event',
+        views: {
+            'tab-event': {
+                templateUrl: 'templates/event-detail.html',
+                controller: 'EventDetailCtrl'
+            }
+        }
     });
 
     $urlRouterProvider.otherwise('/tab/dash');

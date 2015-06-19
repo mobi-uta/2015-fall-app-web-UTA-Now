@@ -1,1 +1,21 @@
-/* Empty. Add your own CSS if you like */
+/* Add your own CSS if you like */
+
+/*
+* Top part of event page that contains the blurred image in background
+* and event name in foreground
+*/
+.event-top{
+	background:url('http://ionicframework.com/img/docs/delorean.jpg');
+	padding: 40px 0px;
+}
+
+.event-top h1{
+	color: #fff;
+	text-align: center;
+}
+
+.event-top p{
+	color: #fff;
+	text-align: center;
+}
+
