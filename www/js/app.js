@@ -1,8 +1,10 @@
 Parse.initialize("z5UQQkU9wJeZ2LcGhLQGymLydw9m3Zk05gBHwxLg", "7BGt335q9qsdxWR9YZ2UPAnCyinn1v59NXI1Gq6n");
 
-var app = angular.module('starter', ['ionic', 'starter.controllers', 'starter.services']);
+var app = angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ngOpenFB']);
 
-app.run(function($ionicPlatform) {
+
+app.run(function($ionicPlatform,ngFB) {
+    ngFB.init({appId: 408131292703702});
     $ionicPlatform.ready(function() {
         if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
             cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -15,7 +17,13 @@ app.run(function($ionicPlatform) {
 })
 
 app.config(function($stateProvider, $urlRouterProvider) {
-   $stateProvider
+
+
+    
+
+
+    
+    $stateProvider
 
     .state('tab', {
         url: "/tab",
@@ -23,36 +31,27 @@ app.config(function($stateProvider, $urlRouterProvider) {
         templateUrl: "templates/tabs.html"
     })
 
-    .state('tab.dash', {
-        url: '/dash',
+    .state('tab.events', {
+        url: '/events',
         views: {
-            'tab-dash': {
-                templateUrl: 'templates/tab-dash.html',
-                controller: 'DashCtrl'
+            'tab-events': {
+                templateUrl: 'templates/tab-events.html',
+                controller: 'EventsCtrl'
             }
         }
     })
 
-    .state('tab.chats', {
-        url: '/chats',
+    .state('tab.event-detail', {
+        url: '/events/:eventId',
         views: {
-            'tab-chats': {
-                templateUrl: 'templates/tab-chats.html',
-                controller: 'ChatsCtrl'
+            'tab-events': {
+                templateUrl: 'templates/tab-event-detail.html',
+                controller: 'EventDetailCtrl'
             }
         }
     })
 
-    .state('tab.chat-detail', {
-        url: '/chats/:chatId',
-        views: {
-            'tab-chats': {
-                templateUrl: 'templates/chat-detail.html',
-                controller: 'ChatDetailCtrl'
-            }
-        }
-    })
-
+    
     .state('tab.account', {
         url: '/account',
         views: {
@@ -63,6 +62,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
         }
     });
 
-    $urlRouterProvider.otherwise('/tab/dash');
+    $urlRouterProvider.otherwise('/tab/events');
 
 });
