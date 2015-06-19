@@ -27,4 +27,7 @@ app.controller('AccountCtrl', function($scope) {
 	};
 });
 
-app.controller('EventDetailCtrl', function($scope) {});
+app.controller('EventDetailCtrl', function($scope) {
+	$scope.eventName = "Event Name";
+	$scope.eventInfo = "This is an event information. It will contain all the cool stuffs about the event.";
+});

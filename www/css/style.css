@@ -14,8 +14,27 @@
 	text-align: center;
 }
 
-.event-top p{
+.event-top p, .event-top a{
 	color: #fff;
 	text-align: center;
+	text-decoration: none;
+}
+
+.custom-item{
+	padding: 5px 16px;
+}
+
+.event-after-top{
+	float:left;
+	padding:10px 0px;
+}
+
+.org-info-button{
+	float:right;
+	border:1px solid #FEA900;
+	padding:8px;
+	border-radius:5px;
+	color:#986306;
+	background-color:#EFBF69;
 }
 
