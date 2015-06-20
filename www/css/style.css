@@ -5,19 +5,31 @@
 * and event name in foreground
 */
 .event-top{
-	background:url('http://ionicframework.com/img/docs/delorean.jpg');
+	position: relative;
 	padding: 40px 0px;
+	overflow: hidden;
+}
+
+/*
+* Styles for blurring image
+*/
+.event-top__background {
+    position: absolute;
+    top: -50%;
+    left: 0;
+    width: 140%;
+    filter:blur(22px);
+    -webkit-filter: blur(22px);
+    -moz-filter:blur(22px);
+    transform:translate3d(0, 0, 0);
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform:translate3d(0, 0, 0);
 }
 
 .event-top h1{
+	position: relative;
 	color: #fff;
 	text-align: center;
-}
-
-.event-top p, .event-top a{
-	color: #fff;
-	text-align: center;
-	text-decoration: none;
 }
 
 .custom-item{
@@ -31,10 +43,17 @@
 
 .org-info-button{
 	float:right;
-	border:1px solid #FEA900;
+	border:1px solid #BF980A;
 	padding:8px;
 	border-radius:5px;
-	color:#986306;
-	background-color:#EFBF69;
+	color:#AA6C00;
+	background-color:#FFC900;
+}
+
+/*
+* Margin for images of people who are going to the event
+*/
+.margin-left{
+	margin-left: 3px;
 }
 

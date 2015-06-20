@@ -1,8 +1,8 @@
 <ion-view view-title="UTA Now">
   <ion-content>
     <div class="event-top">
+      <img class="event-top__background" src="img/coverimg.jpg">    
       <h1>{{ eventName }}</h1>
-      <p><a href="#">facebook link</a></p>
     </div>
     <ul class="list">
       <li class="item custom-item">
@@ -21,7 +21,7 @@
       <div class="item item-divider">Who's Going?</div>
       <div class="item item-body">
         <div>
-          This place is to exibit all the people (might be friends too) who are going for the event.
+          <img src="https://graph.facebook.com/{{ id}}/picture?type=square" ng-repeat="id in goingPeopleIdList" class="margin-left">
         </div>
       </div>
     </div>
