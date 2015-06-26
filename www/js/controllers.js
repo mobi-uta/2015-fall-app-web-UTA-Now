@@ -14,6 +14,17 @@ app.controller('AccountCtrl', function ($scope, $ionicModal, $timeout, ngFB) {
 });
 app.controller('DashCtrl', function($scope) {});
 
+app.controller('EventListController', function($scope, $ionicTabsDelegate, $ionicSlideBoxDelegate) {
+
+  $scope.tabSlideChange = function() {
+    $ionicTabsDelegate.select($ionicSlideBoxDelegate.currentIndex());
+  };
+
+  $scope.tabSelect = function(index) {
+    $ionicSlideBoxDelegate.slide(index);
+  };
+});
+
 app.controller('EventsCtrl', function($scope, Events) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.

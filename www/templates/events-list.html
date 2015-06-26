@@ -4,10 +4,10 @@
   		<button class="button button-icon ion-gear-a" ui-sref="settings"></button>
     </ion-nav-buttons>
 
-	<ion-tabs class="tabs-icon-top tabs-color-active-royal">
-		<ion-tab title="Upcoming" icon-off="ion-tshirt-outline" icon-on="ion-tshirt"></ion-tab>
-		<ion-tab title="Trending" icon="ion-fireball"></ion-tab>
-		<ion-tab title="Recommended" icon="ion-beer"></ion-tab>
+	<ion-tabs class="tabs-icon-top tabs-color-active-energized">
+		<ion-tab title="Upcoming" icon-off="ion-tshirt-outline" icon-on="ion-tshirt" on-select="tabSelect(0)"></ion-tab>
+		<ion-tab title="Trending" icon="ion-fireball" on-select="tabSelect(1)"></ion-tab>
+		<ion-tab title="Recommended" icon="ion-beer" on-select="tabSelect(2)"></ion-tab>
 	</ion-tabs>
 
 	<ion-content class="has-tabs">
@@ -15,7 +15,7 @@
 			<i class="ion-map"></i>
 		</button>
 
-		<ion-slide-box show-pager="false" on-slide-changed="">
+		<ion-slide-box show-pager="false" on-slide-changed="tabSlideChange()">
 			<ion-slide>
 				<div class="list card">
 					<div class="item item-image"><img src="http://placehold.it/500x250"></div>

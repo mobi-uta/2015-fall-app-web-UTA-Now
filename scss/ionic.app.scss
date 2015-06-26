@@ -16,10 +16,14 @@ $dark:                            #444 !default;
 */
 
 $royal: #0064b1 !default;
-$uta_orange: #f58026 !default;
+$energized: #f58026 !default;
 
 .fab {
 	display: none;
+}
+
+.tabs-striped .tab-item.tab-item-active {
+	border-color: $energized !important;
 }
 
 .platform-android .has-tabs {
@@ -36,8 +40,8 @@ $uta_orange: #f58026 !default;
 		display: block;
 		background: #0064b1;
 		border: none;
-		position: absolute;
-		bottom: -30px;
+		position: fixed;
+		bottom: -20px;
 		right: 10px;
 		width: 50px;
 		height: 50px;
