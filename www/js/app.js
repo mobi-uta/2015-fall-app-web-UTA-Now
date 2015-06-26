@@ -4,64 +4,64 @@ var app = angular.module('starter', ['ionic', 'starter.controllers', 'starter.se
 
 
 app.run(function($ionicPlatform,ngFB) {
-    ngFB.init({appId: 408131292703702});
-    $ionicPlatform.ready(function() {
-        if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
-            cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-        }
-        if (window.StatusBar) {
+  ngFB.init({appId: 408131292703702});
+  $ionicPlatform.ready(function() {
+    if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
+      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+    }
+    if (window.StatusBar) {
             // org.apache.cordova.statusbar required
             StatusBar.styleLightContent();
-        }
-    });
+          }
+        });
 })
 
 app.config(function($stateProvider, $urlRouterProvider) {
 
+  $stateProvider
 
-    
+  .state('intro', {
+    url: '/intro',
+    templateUrl: 'templates/intro.html'
+  })
+
+  .state('tab', {
+    url: "/tab",
+    abstract: true,
+    templateUrl: "templates/tabs.html"
+  })
+
+  .state('tab.events', {
+    url: '/events',
+    views: {
+      'tab-events': {
+        templateUrl: 'templates/tab-events.html',
+        controller: 'EventsCtrl'
+      }
+    }
+  })
+
+  .state('tab.event-detail', {
+    url: '/events/:eventId',
+    views: {
+      'tab-events': {
+        templateUrl: 'templates/tab-event-detail.html',
+        controller: 'EventDetailCtrl'
+      }
+    }
+  })
 
 
-    
-    $stateProvider
+  .state('tab.account', {
+    url: '/account',
+    views: {
+      'tab-account': {
+        templateUrl: 'templates/tab-account.html',
+        controller: 'AccountCtrl'
+      }
+    }
+  });
 
-    .state('tab', {
-        url: "/tab",
-        abstract: true,
-        templateUrl: "templates/tabs.html"
-    })
-
-    .state('tab.events', {
-        url: '/events',
-        views: {
-            'tab-events': {
-                templateUrl: 'templates/tab-events.html',
-                controller: 'EventsCtrl'
-            }
-        }
-    })
-
-    .state('tab.event-detail', {
-        url: '/events/:eventId',
-        views: {
-            'tab-events': {
-                templateUrl: 'templates/tab-event-detail.html',
-                controller: 'EventDetailCtrl'
-            }
-        }
-    })
-
-    
-    .state('tab.account', {
-        url: '/account',
-        views: {
-            'tab-account': {
-                templateUrl: 'templates/tab-account.html',
-                controller: 'AccountCtrl'
-            }
-        }
-    });
-
-    $urlRouterProvider.otherwise('/tab/events');
+  $urlRouterProvider.otherwise('/tab/events');
 
 });
