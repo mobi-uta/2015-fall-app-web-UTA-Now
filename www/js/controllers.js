@@ -41,24 +41,8 @@ app.controller('EventsCtrl', function($scope, Events) {
  //        };
 
 });
-app.controller('EventDetailCtrl', function($scope) {
-	// $scope.event = Events.get($stateParams.eventId);
-	
-	// scope.pageSelect = function (b) {
- //            switch (b) {
- //                case 1:
- //                    event.set(event.info);
- //                    break;
- //                case 2:
- //                    event.set(event.name);
- //                    break;
- //                default:
- //                    event.set('');
- //            }
-
- //        };
+app.controller('EventDetailCtrl', function($scope, $stateParams) {
+	$scope.eventName = "Event Name";
+	$scope.eventInfo = "This is an event information. It will contain all the cool stuffs about the event.";
+  $scope.goingPeopleIdList = [4,5,6,7,10,11,13,34,234,456,5676,2334,322,100,4989];
 });
-
-
-
-

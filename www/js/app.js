@@ -16,10 +16,7 @@ app.run(function($ionicPlatform,ngFB) {
     });
 })
 
-app.config(function($stateProvider, $urlRouterProvider) {
-
-
-    
+app.config(function($stateProvider, $urlRouterProvider) {    
 
 
     
@@ -45,12 +42,11 @@ app.config(function($stateProvider, $urlRouterProvider) {
         url: '/events/:eventId',
         views: {
             'tab-events': {
-                templateUrl: 'templates/tab-event-detail.html',
+                templateUrl: 'templates/event-detail.html',
                 controller: 'EventDetailCtrl'
             }
         }
     })
-
     
     .state('tab.account', {
         url: '/account',
