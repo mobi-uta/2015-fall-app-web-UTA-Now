@@ -1,6 +1,6 @@
 <ion-view view-title="UTA Now">
 	<ion-nav-buttons side="primary">
-  		<button class="button button-icon ion-map" ng-click="doSomething()"></button>
+  		<button class="button button-icon ion-map map-button" ng-click="doSomething()"></button>
   		<button class="button button-icon ion-gear-a" ui-sref="settings"></button>
     </ion-nav-buttons>
 
@@ -11,6 +11,10 @@
 	</ion-tabs>
 
 	<ion-content class="has-tabs">
+		<button class="fab">
+			<i class="ion-map"></i>
+		</button>
+
 		<ion-slide-box show-pager="false" on-slide-changed="">
 			<ion-slide>
 				<div class="list card">
