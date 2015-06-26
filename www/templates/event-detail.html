@@ -1,0 +1,30 @@
+<ion-view view-title="UTA Now">
+  <ion-content>
+    <div class="event-top">
+      <img class="event-top__background" src="img/coverimg.jpg">    
+      <h1>{{ eventName }}</h1>
+    </div>
+    <ul class="list">
+      <li class="item custom-item">
+        <span class="event-after-top">Mobi</span><a class="org-info-button">Org Info</a>
+      </li>
+    </ul>
+    <div class="list card">
+      <div class="item item-divider">Event Info</div>
+      <div class="item item-body">
+        <div>
+          {{ eventInfo }}
+        </div>
+      </div>
+    </div>
+    <div class="list card">
+      <div class="item item-divider">Who's Going?</div>
+      <div class="item item-body">
+        <div>
+          <img src="https://graph.facebook.com/{{ id}}/picture?type=square" ng-repeat="id in goingPeopleIdList" class="margin-left">
+        </div>
+      </div>
+    </div>
+
+  </ion-content>
+</ion-view>

@@ -15,6 +15,10 @@ $assertive:                       #ef473a !default;
 $royal:                           #886aea !default;
 $dark:                            #444 !default;
 */
+.platform-android .has-tabs {
+  margin-top: 40px !important;
+  bottom: 0 !important; }
+
 /*!
   Ionicons, v2.0.1
   Created by Ben Sperry for the Ionic Framework, http://ionicons.com/

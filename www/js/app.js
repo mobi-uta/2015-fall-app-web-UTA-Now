@@ -25,43 +25,23 @@ app.config(function($stateProvider, $urlRouterProvider) {
     templateUrl: 'templates/intro.html'
   })
 
-  .state('tab', {
-    url: "/tab",
-    abstract: true,
-    templateUrl: "templates/tabs.html"
-  })
-
-  .state('tab.events', {
+  .state('events-list', {
     url: '/events',
-    views: {
-      'tab-events': {
-        templateUrl: 'templates/tab-events.html',
-        controller: 'EventsCtrl'
-      }
-    }
+    templateUrl: 'templates/events-list.html'
   })
 
-  .state('tab.event-detail', {
-    url: '/events/:eventId',
-    views: {
-      'tab-events': {
-        templateUrl: 'templates/tab-event-detail.html',
-        controller: 'EventDetailCtrl'
-      }
-    }
+  .state('event', {
+    url: '/event/:eventId',
+    templateUrl: 'templates/event-detail.html',
+    controller: 'EventDetailCtrl'
   })
 
-
-  .state('tab.account', {
-    url: '/account',
-    views: {
-      'tab-account': {
-        templateUrl: 'templates/tab-account.html',
-        controller: 'AccountCtrl'
-      }
-    }
+  .state('settings', {
+    url: '/settings',
+    templateUrl: 'templates/settings.html',
+    controller: 'AccountCtrl'
   });
 
-  $urlRouterProvider.otherwise('/tab/events');
+  $urlRouterProvider.otherwise('/events');
 
 });
