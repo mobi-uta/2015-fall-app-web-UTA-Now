@@ -18,6 +18,15 @@ $dark:                            #444 !default;
 $royal: #0064b1 !default;
 $energized: #f58026 !default;
 
+#map {
+  height: 180px;
+}
+
+.img-person {
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
 .fab {
 	display: none;
 }
@@ -26,12 +35,12 @@ $energized: #f58026 !default;
 	border-color: $energized !important;
 }
 
-.platform-android .has-tabs {
-	margin-top: 40px !important;
-	bottom: 0 !important;
-}
-
 .platform-android {
+	.has-tabs {
+		margin-top: 40px !important;
+		bottom: 0 !important;
+	}
+
 	.map-button {
 		display: none;
 	}

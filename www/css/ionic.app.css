@@ -15,6 +15,13 @@ $assertive:                       #ef473a !default;
 $royal:                           #886aea !default;
 $dark:                            #444 !default;
 */
+#map {
+  height: 180px; }
+
+.img-person {
+  border-radius: 50%;
+  margin-right: 10px; }
+
 .fab {
   display: none; }
 
@@ -24,7 +31,6 @@ $dark:                            #444 !default;
 .platform-android .has-tabs {
   margin-top: 40px !important;
   bottom: 0 !important; }
-
 .platform-android .map-button {
   display: none; }
 .platform-android .fab {
