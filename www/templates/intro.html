@@ -1,8 +1,11 @@
 <ion-view hide-nav-bar="true">
-	<ion-content style="background: url(img/splashscreen.jpg); background-size: cover">
+	<ion-content class="splash-bg" scroll="false">
 		<div class="padding intro-buttons">
-      <button class="button button-dark button-block">Login With Facebook</button>  
-      <button class="button button-dark button-block" ui-sref="tab.events">Skip</button>  
-    </div>
+			<button class="button button-fb button-block">
+				<i class="icon ion-social-facebook"></i>
+				Login With Facebook
+			</button>  
+			<a class="button button-block" ui-sref="events-list">Skip</a>  
+		</div>
 	</ion-content>
 </ion-view>

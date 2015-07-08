@@ -1,11 +1,20 @@
 var app = angular.module('starter.controllers', ['ngOpenFB']);
 app.controller('AccountCtrl', function ($scope, $ionicModal, $timeout, ngFB) {
+	ngFB.getLoginStatus()
+		.then(function(loginStatus) {
+			if(loginStatus.status === 'connected') {
+				console.log('connected yo');
+			} else {
+				console.log(loginStatus);
+			}
+		});
+
 	$scope.fbLogin = function () {
-		ngFB.login({scope: 'email,read_stream,publish_actions'}).then(
+		ngFB.login({ scope: 'email,read_stream,publish_actions' }).then(
 			function (response) {
 				if (response.status === 'connected') {
 					console.log('Facebook login succeeded');
-					$scope.closeLogin();
+					//$scope.closeLogin();
 				} else {
 					alert('Facebook login failed');
 				}
@@ -13,7 +22,14 @@ app.controller('AccountCtrl', function ($scope, $ionicModal, $timeout, ngFB) {
 	};
 });
 
+//app.controller('IntroController')
+
 app.controller('EventListController', function($scope, $ionicTabsDelegate, $ionicSlideBoxDelegate) {
+	$scope.$on('$ionicView.enter', function(e) {
+
+		/* Store the user's last visit to the app */
+		window.localStorage['lastVisit'] = new Date();
+	});
 
 	$scope.tabSlideChange = function() {
 		$ionicTabsDelegate.select($ionicSlideBoxDelegate.currentIndex());
@@ -34,21 +50,6 @@ app.controller('EventsCtrl', function($scope, Events) {
   //});
 
 	$scope.events = Events.all();
-	// $scope.event = Events.get($stateParams.eventId);
-	
-	// scope.pageSelect = function (b) {
- //            switch (b) {
- //                case 1:
- //                    event.set(event.info);
- //                    break;
- //                case 2:
- //                    event.set(event.name);
- //                    break;
- //                default:
- //                    event.set('');
- //            }
-
- //        };
 
 });
 
@@ -59,9 +60,9 @@ app.controller('EventDetailCtrl', function($scope, $stateParams) {
 
   var map = L.map('map').setView([51.505, -0.09], 13);
   L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-      attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-      maxZoom: 18,
-      id: 'uta-mobi.mibf1hja',
-      accessToken: 'pk.eyJ1IjoidXRhLW1vYmkiLCJhIjoiNTU0N2FiOWM2NjEyMzUyNjc4NTg5M2I1MGM0YjM2N2IifQ.S4guINAIENtuxT6KVlId-g'
+	  attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+	  maxZoom: 18,
+	  id: 'uta-mobi.mibf1hja',
+	  accessToken: 'pk.eyJ1IjoidXRhLW1vYmkiLCJhIjoiNTU0N2FiOWM2NjEyMzUyNjc4NTg5M2I1MGM0YjM2N2IifQ.S4guINAIENtuxT6KVlId-g'
   }).addTo(map);
 });

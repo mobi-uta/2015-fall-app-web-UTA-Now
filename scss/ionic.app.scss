@@ -22,6 +22,11 @@ $energized: #f58026 !default;
   height: 180px;
 }
 
+.splash-bg {
+	background: url('../img/splashscreen.jpg'); 
+	background-size: cover;
+}
+
 .img-person {
   border-radius: 50%;
   margin-right: 10px;
@@ -33,6 +38,23 @@ $energized: #f58026 !default;
 
 .tabs-striped .tab-item.tab-item-active {
 	border-color: $energized !important;
+}
+
+.intro-buttons {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+
+	.button {
+		background: rgba(0,0,0,0.3);
+		border: none;
+		color: #fff !important;
+	}
+
+	.button-fb {
+		background: $royal;
+	}
 }
 
 .platform-android {
