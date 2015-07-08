@@ -77,6 +77,10 @@ app.controller('EventListController', function($scope, $ionicTabsDelegate, $ioni
 	$scope.tabSelect = function(index) {
 		$ionicSlideBoxDelegate.slide(index);
 	};
+
+	$scope.test = function() {
+		console.log('test');
+	};
 });
 
 app.controller('EventsCtrl', function($scope, Events) {

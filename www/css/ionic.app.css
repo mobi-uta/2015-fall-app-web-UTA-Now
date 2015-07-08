@@ -26,7 +26,7 @@ $dark:                            #444 !default;
   border-radius: 50%;
   margin-right: 10px; }
 
-.fab {
+.fab, .fab-footer {
   display: none; }
 
 .tabs-striped .tab-item.tab-item-active {
@@ -49,12 +49,14 @@ $dark:                            #444 !default;
   bottom: 0 !important; }
 .platform-android .map-button {
   display: none; }
+.platform-android .fab-footer {
+  background: transparent; }
 .platform-android .fab {
   display: block;
   background: #0064b1;
   border: none;
   position: fixed;
-  bottom: -20px;
+  bottom: 10px;
   right: 10px;
   width: 50px;
   height: 50px;
