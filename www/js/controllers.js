@@ -1,5 +1,6 @@
 var app = angular.module('starter.controllers', ['ngOpenFB']);
-app.controller('AccountCtrl', function ($scope, $ionicModal, $timeout, ngFB) {
+
+app.controller('AccountCtrl', function($scope, $ionicModal, $timeout, ngFB) {
 	ngFB.getLoginStatus()
 		.then(function(loginStatus) {
 			if(loginStatus.status === 'connected') {
@@ -22,7 +23,45 @@ app.controller('AccountCtrl', function ($scope, $ionicModal, $timeout, ngFB) {
 	};
 });
 
-//app.controller('IntroController')
+app.controller('IntroController', function($scope, $ionicModal, $timeout, $location, ngFB) {
+	$scope.fbLogin = function(e) {
+		/* Hide fb and show spinner */
+		$scope.fbLoadingSwap(true, e);
+
+		ngFB.login({ scope: 'email,public_profile,user_birthday,rsvp_event,user_education_history' })
+			.then(function(response) {
+				if (response.status === 'connected') {
+
+					/* Get basic user details */
+					ngFB.api({
+						path: '/me',
+						params: {fields: 'id,name,birthday,email,gender,education'}
+					})
+					.then(function(user) {
+
+						/* Store basic FB info */
+						window.localStorage['basicFbInfo'] = JSON.stringify(user);
+						$location.path('events');
+					});
+				} else {
+					/* Stop loading bar */
+					$scope.fbLoadingSwap(false, e);
+				}
+			});
+	};
+
+	$scope.fbLoadingSwap = function(show, e) {
+		var children = angular.element(e)[0].target.children;
+
+		if(show) {
+			angular.element(children[0]).removeClass('hide');
+			angular.element(children[1]).addClass('hide');
+		} else {
+			angular.element(children[1]).removeClass('hide');
+			angular.element(children[0]).addClass('hide');
+		}
+	};
+});
 
 app.controller('EventListController', function($scope, $ionicTabsDelegate, $ionicSlideBoxDelegate) {
 	$scope.$on('$ionicView.enter', function(e) {

@@ -30,7 +30,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
 	.state('intro', {
 		url: '/intro',
-		templateUrl: 'templates/intro.html'
+		templateUrl: 'templates/intro.html',
+		controller: 'IntroController'
 	})
 
 	.state('events-list', {

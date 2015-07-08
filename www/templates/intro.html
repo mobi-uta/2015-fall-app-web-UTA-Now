@@ -1,9 +1,12 @@
 <ion-view hide-nav-bar="true">
 	<ion-content class="splash-bg" scroll="false">
 		<div class="padding intro-buttons">
-			<button class="button button-fb button-block">
-				<i class="icon ion-social-facebook"></i>
-				Login With Facebook
+			<button class="button button-fb button-block" ng-click="fbLogin($event)">
+				<ion-spinner class="fb-spinner hide"></ion-spinner>
+				<span class="fb-content">
+					<i class="icon ion-social-facebook"></i>
+					Login With Facebook
+				</span>
 			</button>  
 			<a class="button button-block" ui-sref="events-list">Skip</a>  
 		</div>
