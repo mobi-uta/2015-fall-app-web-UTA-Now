@@ -1,25 +1,24 @@
 var app = angular.module('starter.controllers', ['ngOpenFB']);
 
-app.controller('AccountCtrl', function($scope, $ionicModal, $timeout, ngFB) {
-	ngFB.getLoginStatus()
-		.then(function(loginStatus) {
-			if(loginStatus.status === 'connected') {
-				console.log('connected yo');
-			} else {
-				console.log(loginStatus);
+app.controller('AccountCtrl', function($scope, $ionicModal, $timeout, $ionicActionSheet, $location, ngFB) {
+	$scope.fbData = window.localStorage['basicFbInfo'];
+
+	$scope.showClearAllData = function(show) {
+		var hideSheet = $ionicActionSheet.show({
+			destructiveText: 'Clear all',
+			titleText: 'Clear all stored data',
+			cancelText: 'Cancel',
+			destructiveButtonClicked: function() {
+				/* This should also log the user out */
+				window.localStorage.clear();
+				$location.path('intro');
+				return true;
 			}
 		});
 
-	$scope.fbLogin = function () {
-		ngFB.login({ scope: 'email,read_stream,publish_actions' }).then(
-			function (response) {
-				if (response.status === 'connected') {
-					console.log('Facebook login succeeded');
-					//$scope.closeLogin();
-				} else {
-					alert('Facebook login failed');
-				}
-			});
+		$timeout(function() {
+			hideSheet();
+		}, 4000);
 	};
 });
 
@@ -38,6 +37,7 @@ app.controller('IntroController', function($scope, $ionicModal, $timeout, $locat
 						params: {fields: 'id,name,birthday,email,gender,education'}
 					})
 					.then(function(user) {
+						$scope.fbLoadingSwap(false, e);
 
 						/* Store basic FB info */
 						window.localStorage['basicFbInfo'] = JSON.stringify(user);

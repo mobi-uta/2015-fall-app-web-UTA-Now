@@ -22,7 +22,7 @@ app.run(function($ionicPlatform, $location, ngFB) {
 			$location.path('intro');
 		}
 	});
-})
+});
 
 app.config(function($stateProvider, $urlRouterProvider) {
 
@@ -52,6 +52,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		controller: 'AccountCtrl'
 	});
 
-	$urlRouterProvider.otherwise('/events-list');
+	$urlRouterProvider.otherwise('/events');
 
 });
