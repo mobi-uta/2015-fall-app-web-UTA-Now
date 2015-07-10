@@ -57,3 +57,20 @@ app.controller('EventDetailCtrl', function($scope, $stateParams) {
 	$scope.eventInfo = "This is an event information. It will contain all the cool stuffs about the event.";
   $scope.goingPeopleIdList = [4,5,6,7,10,11,13,34,234,456,5676,2334,322,100,4989];
 });
+
+app.controller('FindEventCtrl', function($scope, $state) {
+  $scope.findEvent = function(eventURL) {
+        var eventId = eventURL.split('events/')[1].split('/')[0].split('?')[0];
+        $state.go("add-event", { id: eventId });
+  }
+});
+
+app.controller('AddEventCtrl', function($scope, $stateParams, ngFB) {
+  $scope.event = ngFB.api({path: '/' + $stateParams.id})
+    .then(function( res ) {
+        angular.extend($scope.event, res);
+      },
+      function(error){
+        console.log(error);
+      });
+});
