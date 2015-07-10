@@ -1,0 +1,28 @@
+<ion-view view-title="Add Event">
+  <ion-content class="padding">
+    <div class="list">
+      <label class="item item-input item-stacked-label">
+      	<span class="input-label">Event Name</span>
+        <input type="text" name="name" value="{{ event.name }}">
+      </label>
+      <label class="item item-input item-stacked-label">
+      	<span class="input-label">Event Description</span>
+        <textarea name="description">{{ event.description }}</textarea>
+      </label>
+      <label class="item item-input item-stacked-label">
+      	<span class="input-label">Organizer</span>
+        <input type="text" name="organizer" value="{{ event.owner.name }}">
+      </label>
+      <label class="item item-input item-stacked-label">
+      	<span class="input-label">Event Starts</span>
+        <input type="text" name="start_time" value="{{ event.start_time | date:'medium' }}"  disabled>
+      </label>
+      <label class="item item-input item-stacked-label">
+      	<span class="input-label">Event Ends</span>
+        <input type="text" name="start_time" value="{{ event.end_time | date:'medium' }}"  disabled>
+      </label>
+      <button class="button button-full button-positive">Add</button>
+      
+    </div>
+  </ion-content>
+</ion-view>

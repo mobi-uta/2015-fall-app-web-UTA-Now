@@ -1,0 +1,11 @@
+<ion-view view-title="Find Event">
+  <ion-content class="padding">
+    <div class="list">
+      <label class="item item-input">
+        <input type="text" placeholder="Facebook Event URL" ng-model="eventURL">
+      </label>
+      <button class="button button-full button-positive" ng-click="findEvent(eventURL)">Find</button>
+      {{ errorMsg }}
+    </div>
+  </ion-content>
+</ion-view>
