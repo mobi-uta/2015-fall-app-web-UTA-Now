@@ -1,4 +1,4 @@
-<ion-view view-title="UTA Now">
+<ion-view view-title="UTA Now" hide-back-button="true">
 	<ion-nav-buttons side="primary">
   		<button class="button button-icon ion-map map-button" ng-click="doSomething()"></button>
   		<button class="button button-icon ion-gear-a" ui-sref="settings"></button>
@@ -11,9 +11,6 @@
 	</ion-tabs>
 
 	<ion-content class="has-tabs">
-		<button class="fab">
-			<i class="ion-map"></i>
-		</button>
 
 		<ion-slide-box show-pager="false" on-slide-changed="tabSlideChange()">
 			<ion-slide>
@@ -33,6 +30,11 @@
 					<div class="item item-image"><img src="http://placehold.it/500x250"></div>
 					<div class="item">Some people going to the event</div>
 				</div>
+
+				<div class="list card">
+					<div class="item item-image"><img src="http://placehold.it/500x250"></div>
+					<div class="item">Some people going to the event</div>
+				</div>
 			</ion-slide>
 
 			<ion-slide>
@@ -43,5 +45,11 @@
 			</ion-slide>
 		</ion-slide-box>
 	</ion-content>
-
+	
+	<!-- BUG: Cannot click though the footerbar -->
+	<ion-footer-bar class="fab-footer">
+		<button class="fab" ng-click="test()">
+			<i class="ion-map"></i>
+		</button>
+	</ion-footer-bar>
 </ion-view>

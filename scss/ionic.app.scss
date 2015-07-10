@@ -18,7 +18,21 @@ $dark:                            #444 !default;
 $royal: #0064b1 !default;
 $energized: #f58026 !default;
 
-.fab {
+#map {
+  height: 180px;
+}
+
+.splash-bg {
+	background: url('../img/splashscreen.jpg'); 
+	background-size: cover;
+}
+
+.img-person {
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.fab, .fab-footer {
 	display: none;
 }
 
@@ -26,14 +40,35 @@ $energized: #f58026 !default;
 	border-color: $energized !important;
 }
 
-.platform-android .has-tabs {
-	margin-top: 40px !important;
-	bottom: 0 !important;
+.intro-buttons {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+
+	.button {
+		background: rgba(0,0,0,0.3);
+		border: none;
+		color: #fff !important;
+	}
+
+	.button-fb {
+		background: $royal;
+	}
 }
 
 .platform-android {
+	.has-tabs {
+		margin-top: 40px !important;
+		bottom: 0 !important;
+	}
+
 	.map-button {
 		display: none;
+	}
+
+	.fab-footer {
+		background: transparent;
 	}
 
 	.fab {
@@ -41,7 +76,7 @@ $energized: #f58026 !default;
 		background: #0064b1;
 		border: none;
 		position: fixed;
-		bottom: -20px;
+		bottom: 10px;
 		right: 10px;
 		width: 50px;
 		height: 50px;

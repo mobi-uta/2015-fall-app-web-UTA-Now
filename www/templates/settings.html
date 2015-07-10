@@ -1,16 +1,16 @@
 <ion-view view-title="Login">
-  <ion-content class="padding">
-    <div class="list">
-      <label class="item item-input">
-        <span class="input-label">Username</span>
-        <input type="text">
-      </label>
-      <label class="item item-input">
-        <span class="input-label">Password</span>
-        <input type="password">
-      </label>
-      <button class="button button-full button-positive" ng-click="fbLogin()">Log in</button>
-      <button class="button button-full button-positive">Create an account</button>
-    </div>
-  </ion-content>
+	<ion-content>
+		<div class="list">
+		<a class="item item-icon-left" ng-if="!fbData" ui-sref="intro">
+			<i class="icon ion-social-facebook royal"></i>
+			Login With Facebook
+		</a>
+		<a class="item item-icon-left" ng-if="fbData">
+			<i class="icon ion-social-facebook royal"></i>
+			Logout of Facebook
+		</a>
+		<a class="item" ng-click="showClearAllData()">
+			Clear all data
+		</a>
+	</ion-content>
 </ion-view>

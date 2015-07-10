@@ -4,7 +4,7 @@ var app = angular.module('starter', ['ionic', 'starter.controllers', 'starter.se
 
 
 app.run(function($ionicPlatform, ngFB) {
-  ngFB.init({appId: 698647553615190, accessToken: 'CAAJ7ao9BpVYBAAVsRWqEd7M97igACMPTOpntRZAZAcamGKywObjQZAbNZBwPMwKRLS7rrvaIuZCBwZCoTRmE8YUZBYto9YFZC67a6LkGbeLVNzWQe50g4ertC2caoEaXovDimUK7xTOKjxqEZADZALwbW2JdRWGtBoAX3eZBaybJT1nwtIcaQZBKZChgbLycxzC9KJQZCZBtMUwGf7z6xoEhqA34Yai'});
+  ngFB.init({appId: 408131292703702});
   $ionicPlatform.ready(function() {
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);

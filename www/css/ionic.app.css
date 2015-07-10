@@ -15,24 +15,48 @@ $assertive:                       #ef473a !default;
 $royal:                           #886aea !default;
 $dark:                            #444 !default;
 */
-.fab {
+#map {
+  height: 180px; }
+
+.splash-bg {
+  background: url('../img/splashscreen.jpg');
+  background-size: cover; }
+
+.img-person {
+  border-radius: 50%;
+  margin-right: 10px; }
+
+.fab, .fab-footer {
   display: none; }
 
 .tabs-striped .tab-item.tab-item-active {
   border-color: #f58026 !important; }
 
+.intro-buttons {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0; }
+  .intro-buttons .button {
+    background: rgba(0, 0, 0, 0.3);
+    border: none;
+    color: #fff !important; }
+  .intro-buttons .button-fb {
+    background: #0064b1; }
+
 .platform-android .has-tabs {
   margin-top: 40px !important;
   bottom: 0 !important; }
-
 .platform-android .map-button {
   display: none; }
+.platform-android .fab-footer {
+  background: transparent; }
 .platform-android .fab {
   display: block;
   background: #0064b1;
   border: none;
   position: fixed;
-  bottom: -20px;
+  bottom: 10px;
   right: 10px;
   width: 50px;
   height: 50px;
