@@ -2,9 +2,10 @@ Parse.initialize("z5UQQkU9wJeZ2LcGhLQGymLydw9m3Zk05gBHwxLg", "7BGt335q9qsdxWR9YZ
 
 var app = angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ngOpenFB']);
 
+app.value('fbAccessToken', '');
 
-app.run(function($ionicPlatform, ngFB) {
-  ngFB.init({appId: 1625138201105249 });
+app.run(function($ionicPlatform, ngFB, fbAccessToken, $location) {
+  ngFB.init({appId: 1625138201105249, accessToken: fbAccessToken });
   $ionicPlatform.ready(function() {
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
