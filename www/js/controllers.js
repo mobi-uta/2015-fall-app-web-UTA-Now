@@ -35,7 +35,7 @@ app.controller('AccountCtrl', function($scope, $ionicModal, $timeout, $ionicActi
 	};
 });
 
-app.controller('IntroController', function($scope, $ionicModal, $timeout, $location, ngFB) {
+app.controller('IntroController', function($scope, $ionicModal, $timeout, $location, ngFB, fbAccessToken) {
 	$scope.fbLogin = function(e) {
 		/* Hide fb and show spinner */
 		$scope.fbLoadingSwap(true, e);
@@ -43,6 +43,7 @@ app.controller('IntroController', function($scope, $ionicModal, $timeout, $locat
 		ngFB.login({ scope: 'email,public_profile,user_birthday,rsvp_event,user_education_history' })
 			.then(function(response) {
 				if (response.status === 'connected') {
+					fbAccessToken = response.authResponse.accessToken;
 
 					/* Get basic user details */
 					ngFB.api({
@@ -123,7 +124,7 @@ app.controller('EventDetailCtrl', function($scope, $stateParams) {
   }).addTo(map);
 });
 
-app.controller('FindEventCtrl', function($scope, ngFB, eventDetail, $location) {
+app.controller('FindEventCtrl', function($scope, ngFB, eventDetail, $location, fbAccessToken) {
   $scope.eventURL = "";
   $scope.findEvent = function(eventURL) {
         var eventId = {};
