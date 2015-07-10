@@ -13,8 +13,14 @@ app.run(function($ionicPlatform, ngFB) {
             // org.apache.cordova.statusbar required
             StatusBar.styleLightContent();
           }
-        });
-})
+    /* Check if user has ever opened the app before
+     * If not, open intro screen
+     **/
+    if(!window.localStorage['lastVisit']) {
+      $location.path('intro');
+    }      
+  });
+});
 
 app.config(function($stateProvider, $urlRouterProvider) {
 
@@ -22,7 +28,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
   .state('intro', {
     url: '/intro',
-    templateUrl: 'templates/intro.html'
+    templateUrl: 'templates/intro.html',
+    controller: 'IntroController'
   })
 
   .state('events-list', {
