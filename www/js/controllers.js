@@ -1,5 +1,18 @@
 var app = angular.module('starter.controllers', ['ngOpenFB']);
 
+app.service('eventDetail', function () {
+    var event = {};
+
+    return {
+        getEvent: function () {
+            return event;
+        },
+        setEvent: function(value) {
+            event = value;
+        }
+    };
+});
+
 app.controller('AccountCtrl', function($scope, $ionicModal, $timeout, $ionicActionSheet, $location, ngFB) {
 	$scope.fbData = window.localStorage['basicFbInfo'];
 
@@ -110,19 +123,31 @@ app.controller('EventDetailCtrl', function($scope, $stateParams) {
   }).addTo(map);
 });
 
-app.controller('FindEventCtrl', function($scope, $state) {
+app.controller('FindEventCtrl', function($scope, ngFB, eventDetail, $location) {
+  $scope.eventURL = "";
   $scope.findEvent = function(eventURL) {
-        var eventId = eventURL.split('events/')[1].split('/')[0].split('?')[0];
-        $state.go("add-event", { id: eventId });
+        var eventId = {};
+        $scope.errorMsg = "";
+        if (eventURL.indexOf('events/') >= 0) {
+        	eventId = eventURL.split('events/')[1].split('/')[0].split('?')[0]
+        	var event = ngFB.api({path: '/' + eventId})
+			    .then(function( res ) {
+			        angular.extend(event, res);
+			      },
+			      function(error){
+			        console.log(error);
+			      });
+			eventDetail.setEvent(event);
+			$location.path('add-event');
+        }
+        else {
+        	$scope.errorMsg = "Invalid Event URL. Please enter a valid event URL.";
+        }
+        
   }
 });
 
-app.controller('AddEventCtrl', function($scope, $stateParams, ngFB) {
-  $scope.event = ngFB.api({path: '/' + $stateParams.id})
-    .then(function( res ) {
-        angular.extend($scope.event, res);
-      },
-      function(error){
-        console.log(error);
-      });
+app.controller('AddEventCtrl', function($scope, eventDetail) {
+  $scope.event = eventDetail.getEvent();
+  console.log(eventDetail.getEvent());
 });
