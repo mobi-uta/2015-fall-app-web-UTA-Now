@@ -1,8 +1,14 @@
 <ion-view view-title="UTA Now" hide-back-button="true">
-	<ion-nav-buttons side="primary">
-  		<button class="button button-icon ion-map map-button" ng-click="doSomething()"></button>
-  		<button class="button button-icon ion-gear-a" ui-sref="settings"></button>
-    </ion-nav-buttons>
+	<ion-nav-bar class="bar-royal">
+		<ion-nav-buttons side="left">
+			<button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+			</button>
+		</ion-nav-buttons>
+		<ion-nav-buttons side="primary">
+			<button class="button button-icon ion-map map-button" ng-click="doSomething()"></button>
+			<!-- <button class="button button-icon ion-gear-a" ui-sref="settings"></button> -->
+		</ion-nav-buttons>
+	</ion-nav-bar>
 
 	<ion-tabs class="tabs-icon-top tabs-color-active-energized">
 		<ion-tab title="Upcoming" icon-off="ion-tshirt-outline" icon-on="ion-tshirt" on-select="tabSelect(0)"></ion-tab>
@@ -11,7 +17,6 @@
 	</ion-tabs>
 
 	<ion-content class="has-tabs">
-
 		<ion-slide-box show-pager="false" on-slide-changed="tabSlideChange()">
 			<ion-slide>
 				<div class="list card">
@@ -19,6 +24,7 @@
 					<div class="item">Some people going to the event</div>
 				</div>
 			</ion-slide>
+
 
 			<ion-slide>
 				<div class="list card">
