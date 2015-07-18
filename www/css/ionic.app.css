@@ -27,7 +27,10 @@ $dark:                            #444 !default;
   margin-right: 10px; }
 
 .fab, .fab-footer {
-  display: none; }
+  display: none !important; }
+
+.fab-footer {
+  background: transparent !important; }
 
 .tabs-striped .tab-item.tab-item-active {
   border-color: #f58026 !important; }
@@ -50,9 +53,9 @@ $dark:                            #444 !default;
 .platform-android .map-button {
   display: none; }
 .platform-android .fab-footer {
-  background: transparent; }
+  display: block !important; }
 .platform-android .fab {
-  display: block;
+  display: block !important;
   background: #0064b1;
   border: none;
   position: fixed;

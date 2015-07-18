@@ -43,7 +43,8 @@ app.controller('IntroController', function($scope, $ionicModal, $timeout, $locat
 		ngFB.login({ scope: 'email,public_profile,user_birthday,rsvp_event,user_education_history' })
 			.then(function(response) {
 				if (response.status === 'connected') {
-					fbAccessToken = response.authResponse.accessToken;
+					var accessToken = response.authResponse.accessToken;
+					fbAccessToken = accessToken;
 
 					/* Get basic user details */
 					ngFB.api({
@@ -56,6 +57,30 @@ app.controller('IntroController', function($scope, $ionicModal, $timeout, $locat
 						/* Store basic FB info */
 						window.localStorage['basicFbInfo'] = JSON.stringify(user);
 						$location.path('events');
+						console.log(user);
+
+						var ParseUser = Parse.Object.extend('Users');
+						var pfUser = new ParseUser();
+
+						pfUser.set("name", user.name);
+						pfUser.set("email", user.email);
+						pfUser.set("fbToken", accessToken);
+						pfUser.set("fbId", user.id);
+						pfUser.set("birthdate", user.birthday);
+						pfUser.set("gender", user.gender);
+
+						pfUser.save(null, {
+							success: function(pfUser) {
+								console.log("Saved!!");
+								console.log(pfUser);
+							},
+							error: function(pfUser, error) {
+								console.log(error);
+								console.log(pfUser);
+							}
+						});
+
+
 					});
 				} else {
 					/* Stop loading bar */

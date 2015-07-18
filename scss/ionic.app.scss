@@ -32,9 +32,9 @@ $energized: #f58026 !default;
   margin-right: 10px;
 }
 
-.fab, .fab-footer {
-	display: none;
-}
+.fab, .fab-footer { display: none !important; }
+
+.fab-footer { background: transparent !important; }
 
 .tabs-striped .tab-item.tab-item-active {
 	border-color: $energized !important;
@@ -68,11 +68,11 @@ $energized: #f58026 !default;
 	}
 
 	.fab-footer {
-		background: transparent;
+		display: block !important;
 	}
 
 	.fab {
-		display: block;
+		display: block !important;
 		background: #0064b1;
 		border: none;
 		position: fixed;
