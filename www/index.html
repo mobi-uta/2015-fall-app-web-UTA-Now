@@ -15,6 +15,9 @@
 
 		<!-- ionic/angularjs js -->
 		<script src="lib/ionic/js/ionic.bundle.js"></script>
+		<script src="lib/ngCordova/dist/ng-cordova.js"></script>
+		<script src="lib/ionic-service-core/ionic-core.js"></script>
+		<script src="lib/ionic-service-push/ionic-push.js"></script>
 
 		<!-- Extra libs -->
 		<script src="lib/parse/parse.min.js"></script>
@@ -31,7 +34,14 @@
 		<script src="js/services.js"></script>
 
 	</head>
-	<body ng-app="starter">
+	<body ng-app="starter" ng-controller = "PushCtrl">
+		<button class="button button-block button-dark" ng-click="identifyUser()">
+        Identify a user
+      </button>
+ 
+      <button class="button button-block button-positive" ng-if="identified" ng-click="pushRegister()">
+        Register for Push
+      </button>
 		<!--
 		  The nav bar that will be updated as we navigate between views.
 		-->

@@ -1,6 +1,6 @@
-Parse.initialize("F9BqVIRG5hs1PPUktFM5FGrQ4gnJgGyHZKwTSjiY", "kFs2almVuiCgRnbrPNyCnpfNCrYshHzn2GvZSnhc");
+	Parse.initialize("F9BqVIRG5hs1PPUktFM5FGrQ4gnJgGyHZKwTSjiY", "kFs2almVuiCgRnbrPNyCnpfNCrYshHzn2GvZSnhc");
 
-var app = angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ngOpenFB']);
+var app = angular.module('starter', ['ionic', 'ngCordova','ionic.service.core','ionic.service.push','starter.controllers', 'starter.services','ngOpenFB']);
 
 app.value('fbAccessToken', '');
 
@@ -22,6 +22,18 @@ app.run(function($ionicPlatform, ngFB, fbAccessToken, $location) {
 	 }      
 	});
 });
+
+app.config(['$ionicAppProvider', function($ionicAppProvider) {
+  // Identify app
+  $ionicAppProvider.identify({
+    // The App ID (from apps.ionic.io) for the server
+    app_id: '104f9ff7',
+    // The public API key all services will use for this app
+    api_key: '60eff813ba66e4d17297751176defe45bb755bcbb1b0716e',
+    // Set the app to use development pushes
+    dev_push: true
+  });
+}]);
 
 app.config(function($stateProvider, $urlRouterProvider) {
 
