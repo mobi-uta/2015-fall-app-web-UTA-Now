@@ -174,7 +174,6 @@ app.controller('FindEventCtrl', function($scope, ngFB, eventDetail, $location, f
   }
 });
 
-
 app.controller('AddEventCtrl', function($scope, eventDetail) {
   $scope.event = eventDetail.getEvent();
   console.log(eventDetail.getEvent());
