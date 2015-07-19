@@ -83,8 +83,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		url: '/add-event',
 		templateUrl: 'templates/add-event.html',
 		controller: 'AddEventCtrl'
+	})
+	.state('organization-page',{
+		url: '/org-page',
+		templateUrl: 'templates/organization-page.html',
+		contoller: 'OrgPageCtrl'
 	});
-
 	$urlRouterProvider.otherwise('/main/events');
 
 });
