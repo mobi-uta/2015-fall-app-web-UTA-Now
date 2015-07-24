@@ -88,7 +88,13 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		url: '/org-page',
 		templateUrl: 'templates/organization-page.html',
 		contoller: 'OrgPageCtrl'
+	})
+	.state ('testCalendar',{
+		url: '/calender-add',
+		templateUrl: 'templates/calender.html',
+		controller: 'addCalendar'
 	});
+
 	$urlRouterProvider.otherwise('/main/events');
 
 });

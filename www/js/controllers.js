@@ -1,4 +1,4 @@
-var app = angular.module('starter.controllers', ['ngOpenFB']);
+var app = angular.module('starter.controllers', ['ngOpenFB','ngCordova']);
 
 app.service('eventDetail', function () {
     var event = {};
@@ -150,6 +150,7 @@ app.controller('EventDetailCtrl', function($scope, $stateParams) {
   }).addTo(map);
 });
 
+
 app.controller('FindEventCtrl', function($scope, ngFB, eventDetail, $location, fbAccessToken) {
   $scope.eventURL = "";
   $scope.findEvent = function(eventURL) {
@@ -177,6 +178,25 @@ app.controller('FindEventCtrl', function($scope, ngFB, eventDetail, $location, f
 app.controller('AddEventCtrl', function($scope, eventDetail) {
   $scope.event = eventDetail.getEvent();
   console.log(eventDetail.getEvent());
+});
+
+
+// add phone calendar
+app.controller('addCalendar', function($scope,$cordovaCalendar){
+ 		
+ 		$scope.createEvent = function() {
+        $cordovaCalendar.createEvent({
+            title: 'Space Race',
+            location: 'The Moon',
+            notes: 'Bring sandwiches',
+            startDate: new Date(2015, 0, 15, 18, 30, 0, 0, 0),
+            endDate: new Date(2015, 1, 17, 12, 0, 0, 0, 0)
+        }).then(function (result) {
+            console.log("Event created successfully");
+        }, function (err) {
+            console.error("There was an error: " + err);
+        });
+    }
 });
 
 app.controller('PushCtrl', function($scope, $rootScope, $ionicUser, $ionicPush) {
