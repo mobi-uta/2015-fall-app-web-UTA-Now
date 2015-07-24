@@ -57,30 +57,48 @@ app.controller('IntroController', function($scope, $ionicModal, $timeout, $locat
 						/* Store basic FB info */
 						window.localStorage['basicFbInfo'] = JSON.stringify(user);
 						$location.path('events');
-						console.log(user);
 
+						/* Generate parse object */
 						var ParseUser = Parse.Object.extend('Users');
 						var pfUser = new ParseUser();
 
-						pfUser.set("name", user.name);
-						pfUser.set("email", user.email);
-						pfUser.set("fbToken", accessToken);
-						pfUser.set("fbId", user.id);
-						pfUser.set("birthdate", user.birthday);
-						pfUser.set("gender", user.gender);
+						/* Update parse object with FB info */
+						pfUser.set('name', user.name);
+						pfUser.set('email', user.email);
+						pfUser.set('fbToken', accessToken);
+						pfUser.set('fbId', user.id);
+						pfUser.set('birthdate', new Date(Date.parse(user.birthday)));
+						pfUser.set('gender', user.gender);
 
-						pfUser.save(null, {
-							success: function(pfUser) {
-								console.log("Saved!!");
-								console.log(pfUser);
+						/* Query to make sure user doesnt exist */
+						var query = new Parse.Query(ParseUser);
+						query.equalTo('fbId', user.id);
+						query.find({
+							success: function(results) {
+
+								/* User already exists and update them */
+								if(results.length > 0) {
+									console.log('User already exists');
+									pfUser.set('objectId', results[0].id);
+									pfUser.save(null, {
+										success: function(pfUser) {
+											console.log("User updated");
+										},
+										error: function(pfUser, error) {
+										}
+									});
+								} else {
+									pfUser.save(null, {
+										success: function(pfUser) {
+											console.log("New user saved");
+										},
+										error: function(pfUser, error) {
+										}
+									});
+								}
 							},
-							error: function(pfUser, error) {
-								console.log(error);
-								console.log(pfUser);
-							}
+							error: function(error) {}
 						});
-
-
 					});
 				} else {
 					/* Stop loading bar */
