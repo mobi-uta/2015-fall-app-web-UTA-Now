@@ -13,6 +13,7 @@ app.service('eventDetail', function () {
 	};
 });
 
+
 app.controller('AccountCtrl', function($scope, $ionicModal, $timeout, $ionicActionSheet, $location, ngFB) {
 	$scope.fbData = window.localStorage['basicFbInfo'];
 
@@ -225,7 +226,59 @@ app.controller('FindEventCtrl', function($scope, ngFB, eventDetail, $location, f
   }
 });
 
+
 app.controller('AddEventCtrl', function($scope, eventDetail) {
   $scope.event = eventDetail.getEvent();
   console.log(eventDetail.getEvent());
+});
+
+app.controller('PushCtrl', function($scope, $rootScope, $ionicUser, $ionicPush) {
+  // Identifies a user with the Ionic User service
+  $scope.identifyUser = function() {
+    console.log('Ionic User: Identifying with Ionic User service');
+
+    var user = $ionicUser.get();
+    if(!user.user_id) {
+      // generate a random ID.
+      user.user_id = $ionicUser.generateGUID();
+    };
+
+    // Add some metadata // not really needed 
+    angular.extend(user, {
+      name: 'Nhat',
+      bio: 'Asian'
+    });
+
+    // Identify your user with the Ionic User Service
+    $ionicUser.identify(user).then(function(){
+      $scope.identified = true;
+      alert('Identified user ' + user.name + '\n ID ' + user.user_id);
+    });
+  };
+
+  // Registers a device for push notifications and stores its token
+  $scope.pushRegister = function() {
+    console.log('Ionic Push: Registering user');
+
+    // Register with the Ionic Push service.  All parameters are optional.
+    $ionicPush.register({
+      canShowAlert: true, //Can pushes show an alert on your screen?
+      canSetBadge: true, //Can pushes update app icon badges?
+      canPlaySound: true, //Can notifications play a sound?
+      canRunActionsOnWake: true, //Can run actions outside the app,
+      onNotification: function(notification) {
+        // Handle new push notifications here
+        // console.log(notification);
+        return true;
+      }
+    });
+  };
+
+  // get device token for testing 
+  $rootScope.$on('$cordovaPush:tokenReceived', function(event, data) {
+  alert("Successfully registered token " + data.token);
+  console.log('Ionic Push: Got token ', data.token, data.platform);
+  $scope.token = data.token;
+});
+
 });
