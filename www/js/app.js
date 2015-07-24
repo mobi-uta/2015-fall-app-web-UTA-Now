@@ -1,6 +1,6 @@
 Parse.initialize("F9BqVIRG5hs1PPUktFM5FGrQ4gnJgGyHZKwTSjiY", "kFs2almVuiCgRnbrPNyCnpfNCrYshHzn2GvZSnhc");
 
-var app = angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ngOpenFB']);
+var app = angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ngOpenFB', 'leaflet-directive']);
 
 app.value('fbAccessToken', '');
 
