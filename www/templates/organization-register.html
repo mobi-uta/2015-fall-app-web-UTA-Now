@@ -1,0 +1,19 @@
+<ion-view view-title="Register an organization">
+	<ion-content>
+		<div class="card">
+			<div class="item item-text-wrap">
+				<i class="ion-information-circled"></i>
+				This is the list of all Facebook pages you are an admin of. Please select the page you would like to register or join.
+			</div>
+		</div>
+
+		<div class="list">
+			<a class="item item-thumbnail-left item-icon-right" ng-repeat="org in orgs">
+				<img ng-src="{{ org.picture.data.url }}" alt="">
+				<i class="icon ion-checkmark-round royal"></i>
+				<h2>{{ org.name }}</h2>
+				<p>{{ org.about }}</p>
+			</a>
+		</div>
+	</ion-content>
+</ion-view>

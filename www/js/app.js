@@ -31,9 +31,9 @@ app.config(['$ionicAppProvider', function($ionicAppProvider) {
   // Identify app
   $ionicAppProvider.identify({
     // The App ID (from apps.ionic.io) for the server
-    app_id: '104f9ff7',
+    app_id: '5e0c520a',
     // The public API key all services will use for this app
-    api_key: '60eff813ba66e4d17297751176defe45bb755bcbb1b0716e',
+    api_key: '36c48cd254345d89f5b66f2be2616e3aae5e06fbe44d4598',
     // Set the app to use development pushes
     dev_push: true
   });
@@ -63,6 +63,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
 				controller: 'EventListController'
 			}
 		}
+	})
+
+	.state('register-organization', {
+		url: '/event-organization',
+		templateUrl: 'templates/organization-register.html',
+		controller: 'RegisterOrganizationController'
 	})
 
 	.state('event', {

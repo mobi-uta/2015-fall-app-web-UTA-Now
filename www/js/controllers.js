@@ -41,7 +41,7 @@ app.controller('IntroController', function($scope, $ionicModal, $timeout, $locat
 		/* Hide fb and show spinner */
 		$scope.fbLoadingSwap(true, e);
 
-		ngFB.login({ scope: 'email,public_profile,user_birthday,rsvp_event,user_education_history' })
+		ngFB.login({ scope: 'email,public_profile,user_birthday,rsvp_event,user_education_history,manage_pages' })
 			.then(function(response) {
 				if (response.status === 'connected') {
 					var accessToken = response.authResponse.accessToken;
@@ -224,6 +224,21 @@ app.controller('FindEventCtrl', function($scope, ngFB, eventDetail, $location, f
 		}
 		
   }
+});
+
+app.controller('RegisterOrganizationController', function($scope, $http, fbAccessToken, ngFB) {
+	$scope.orgs = [];
+
+	ngFB.api({
+		path: '/me/accounts',
+		params: {fields: 'picture, name, about'}
+	})
+	.then(function(user) {
+		console.log(user);
+		angular.forEach(user.data, function(value, key) {
+			$scope.orgs.push(value);
+		});
+	});
 });
 
 
