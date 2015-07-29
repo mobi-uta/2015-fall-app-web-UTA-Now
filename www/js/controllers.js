@@ -36,7 +36,7 @@ app.controller('AccountCtrl', function($scope, $ionicModal, $timeout, $ionicActi
 	};
 });
 
-app.controller('IntroController', function($scope, $ionicModal, $timeout, $location, ngFB, fbAccessToken) {
+app.controller('IntroController', function($scope, $ionicModal, $timeout, $location, ngFB, fbAccessToken,AccService,EventFeed) {
 	$scope.fbLogin = function(e) {
 		/* Hide fb and show spinner */
 		$scope.fbLoadingSwap(true, e);
@@ -60,46 +60,13 @@ app.controller('IntroController', function($scope, $ionicModal, $timeout, $locat
 						$location.path('events');
 
 						/* Generate parse object */
-						var ParseUser = Parse.Object.extend('Users');
-						var pfUser = new ParseUser();
 
-						/* Update parse object with FB info */
-						pfUser.set('name', user.name);
-						pfUser.set('email', user.email);
-						pfUser.set('fbToken', accessToken);
-						pfUser.set('fbId', user.id);
-						pfUser.set('birthdate', new Date(Date.parse(user.birthday)));
-						pfUser.set('gender', user.gender);
+						var pfUser = AccService.newUser(user.name,user.email,accessToken,user.id,user.birthday,user.gender);
+						AccService.checkUser(pfUser);
 
-						/* Query to make sure user doesnt exist */
-						var query = new Parse.Query(ParseUser);
-						query.equalTo('fbId', user.id);
-						query.find({
-							success: function(results) {
 
-								/* User already exists and update them */
-								if(results.length > 0) {
-									console.log('User already exists');
-									pfUser.set('objectId', results[0].id);
-									pfUser.save(null, {
-										success: function(pfUser) {
-											console.log("User updated");
-										},
-										error: function(pfUser, error) {
-										}
-									});
-								} else {
-									pfUser.save(null, {
-										success: function(pfUser) {
-											console.log("New user saved");
-										},
-										error: function(pfUser, error) {
-										}
-									});
-								}
-							},
-							error: function(error) {}
-						});
+						/* Test loading events */
+						console.log(EventFeed.getAllEvent());
 					});
 				} else {
 					/* Stop loading bar */
@@ -239,6 +206,10 @@ app.controller('RegisterOrganizationController', function($scope, $http, fbAcces
 			$scope.orgs.push(value);
 		});
 	});
+
+	$scope.addOrg = function(){};
+	
+	$scope.createCustomOrg = function(){};
 });
 
 

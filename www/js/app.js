@@ -1,5 +1,4 @@
 	Parse.initialize("F9BqVIRG5hs1PPUktFM5FGrQ4gnJgGyHZKwTSjiY", "kFs2almVuiCgRnbrPNyCnpfNCrYshHzn2GvZSnhc");
-
 var app = angular.module('starter', [
 	'ionic', 'ionic.service.core','ionic.service.push', 
 	'starter.controllers', 'starter.services',
@@ -87,6 +86,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		url: '/find-event',
 		templateUrl: 'templates/find-event.html',
 		controller: 'FindEventCtrl'
+	})
+
+	.state ('org-page',{
+		url: '/organization',
+		templateUrl: 'templates/organization-page.html',
+		controller: 'OrgController'
 	})
 
 	.state('add-event', {
