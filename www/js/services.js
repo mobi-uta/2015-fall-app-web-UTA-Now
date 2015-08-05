@@ -1,4 +1,9 @@
 var app = angular.module('starter.services', []);
+// initialize parse
+app.value('PARSE_CREDENTIALS',{
+    APP_ID: 'F9BqVIRG5hs1PPUktFM5FGrQ4gnJgGyHZKwTSjiY',
+    REST_API_KEY:'Kna1JhHX4WpRonGOZIMPxQVFLV0ugDQgO4t4OK0D'
+});
 
 // Parse user account data
 app.factory ('AccService', function(){
@@ -50,42 +55,69 @@ app.factory ('AccService', function(){
 };
 });
 
-app.factory ('EventFeed', function(){
 
-  var Events = Parse.Object.extend("Events");
+app.factory ('EventFeed', ['$http','PARSE_CREDENTIALS',function($http,PARSE_CREDENTIALS){
   
-  var listEvent =[];
-
-  return {
-    getAllEvent: function(){
-      var query = new Parse.Query(Events);
-      query.include("Events.eventName");
-      query.find({
-
-          success: function(events) {
-
-              for (var i = 0; i < events.length; i++) {
-                  var event = events[i];
-                  var eventName = event.get("eventName");
-                  console.log(eventName);
-                  listEvent.push(eventName);
-
-
+  return{
+    getAll: function(){
+      return $http.get('https://api.parse.com/1/classes/Events',{
+                headers:{
+                    'X-Parse-Application-Id': PARSE_CREDENTIALS.APP_ID,
+                    'X-Parse-REST-API-Key':PARSE_CREDENTIALS.REST_API_KEY,
                 }
+            });
 
-          },
-          error: function(error) {
-              alert(error);
-      }
-    });
+    },
+    get: function(id){
+      return $http.get('https://api.parse.com/1/classes/Events/' +id,{
+                headers:{
+                    'X-Parse-Application-Id': PARSE_CREDENTIALS.APP_ID,
+                    'X-Parse-REST-API-Key':PARSE_CREDENTIALS.REST_API_KEY,
+                }
+            });
+    },
+    create: function(data){
+       return $http.post('https://api.parse.com/1/classes/Events',data,{
+                headers:{
+                    'X-Parse-Application-Id': PARSE_CREDENTIALS.APP_ID,
+                    'X-Parse-REST-API-Key':PARSE_CREDENTIALS.REST_API_KEY,
+                    'Content-Type':'application/json'
+                }
+            });
+    },
+    edit:function(id,data){
+            return $http.put('https://api.parse.com/1/classes/Events/'+id,data,{
+                headers:{
+                    'X-Parse-Application-Id': PARSE_CREDENTIALS.APP_ID,
+                    'X-Parse-REST-API-Key':PARSE_CREDENTIALS.REST_API_KEY,
+                    'Content-Type':'application/json'
+                }
+            });
+        },
+    delete:function(id){
+        return $http.delete('https://api.parse.com/1/classes/Events/'+id,{
+            headers:{
+                'X-Parse-Application-Id': PARSE_CREDENTIALS.APP_ID,
+                'X-Parse-REST-API-Key':PARSE_CREDENTIALS.REST_API_KEY,
+                'Content-Type':'application/json'
+            }
+        });
+    }
+  }
 
-    return listEvent;
 
-        }
-      };
+
+
+
+
+
+
+}]);
+
+  
+      
     
 
-});
 app.factory('Events', function() {
   // Might use a resource here that returns a JSON array
 

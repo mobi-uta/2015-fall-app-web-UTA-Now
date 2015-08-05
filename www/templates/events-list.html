@@ -19,36 +19,12 @@
 	<ion-content class="has-tabs">
 		<ion-slide-box show-pager="false" on-slide-changed="tabSlideChange()">
 			<ion-slide>
-				<div class="list card">
-					<div class="item item-image"><img src="http://placehold.it/500x250"></div>
-					<div class="item">Some people going to the event</div>
+				<div class="list card" ng-repeat = "item in items | orderBy: '-createdAt'">
+					<div class="item item-image"><img src="{{item.imageURL}}"></div>
+					<div class="item">{{item.eventName}}</div>
 				</div>
 			</ion-slide>
 
-
-			<ion-slide>
-				<div class="list card">
-					<div class="item item-image"><img src="http://placehold.it/500x250"></div>
-					<div class="item">Some people going to the event</div>
-				</div>
-
-				<div class="list card">
-					<div class="item item-image"><img src="http://placehold.it/500x250"></div>
-					<div class="item">Some people going to the event</div>
-				</div>
-
-				<div class="list card">
-					<div class="item item-image"><img src="http://placehold.it/500x250"></div>
-					<div class="item">Some people going to the event</div>
-				</div>
-			</ion-slide>
-
-			<ion-slide>
-				<div class="list card">
-					<div class="item item-image"><img src="http://placehold.it/500x250"></div>
-					<div class="item">Some people going to the event</div>
-				</div>
-			</ion-slide>
 		</ion-slide-box>
 	</ion-content>
 	

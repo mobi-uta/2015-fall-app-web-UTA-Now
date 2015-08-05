@@ -1,22 +1,11 @@
 var app = angular.module('starter.controllers', ['ngOpenFB']);
 
-app.service('eventDetail', function () {
-	var event = {};
 
-	return {
-		getEvent: function () {
-			return event;
-		},
-		setEvent: function(value) {
-			event = value;
-		}
-	};
-});
 
 
 app.controller('AccountCtrl', function($scope, $ionicModal, $timeout, $ionicActionSheet, $location, ngFB) {
 	$scope.fbData = window.localStorage['basicFbInfo'];
-
+	
 	$scope.showClearAllData = function(show) {
 		var hideSheet = $ionicActionSheet.show({
 			destructiveText: 'Clear all',
@@ -65,8 +54,8 @@ app.controller('IntroController', function($scope, $ionicModal, $timeout, $locat
 						AccService.checkUser(pfUser);
 
 
-						/* Test loading events */
-						console.log(EventFeed.getAllEvent());
+						
+
 					});
 				} else {
 					/* Stop loading bar */
@@ -88,7 +77,7 @@ app.controller('IntroController', function($scope, $ionicModal, $timeout, $locat
 	};
 });
 
-app.controller('EventListController', function($scope, $ionicTabsDelegate, $ionicSlideBoxDelegate) {
+app.controller('EventListController', function($scope, $ionicTabsDelegate, $ionicSlideBoxDelegate,EventFeed) {
 	$scope.$on('$ionicView.enter', function(e) {
 
 		/* Store the user's last visit to the app */
@@ -106,6 +95,10 @@ app.controller('EventListController', function($scope, $ionicTabsDelegate, $ioni
 	$scope.test = function() {
 		console.log('test');
 	};
+	EventFeed.getAll().success(function(data){
+    $scope.items=data.results;
+    });
+   
 });
 
 app.controller('EventsCtrl', function($scope, Events) {
