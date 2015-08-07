@@ -21,6 +21,20 @@
 			<ion-slide>
 				<div class="list card" ng-repeat = "item in items | orderBy: '-createdAt'">
 					<div class="item item-image"><img src="{{item.imageURL}}"></div>
+					<div class="item">{{item.eventName}} - {{ item.stat_date }}</div>
+				</div>
+			</ion-slide>
+
+			<ion-slide>
+				<div class="list card" ng-repeat = "item in items | orderBy: '-createdAt'">
+					<div class="item item-image"><img src="{{item.imageURL}}"></div>
+					<div class="item">{{item.eventName}}</div>
+				</div>
+			</ion-slide>
+
+			<ion-slide>
+				<div class="list card" ng-repeat = "item in items | orderBy: '-createdAt'">
+					<div class="item item-image"><img src="{{item.imageURL}}"></div>
 					<div class="item">{{item.eventName}}</div>
 				</div>
 			</ion-slide>

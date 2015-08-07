@@ -3,8 +3,21 @@ var app = angular.module('starter.controllers', ['ngOpenFB']);
 
 
 
-app.controller('AccountCtrl', function($scope, $ionicModal, $timeout, $ionicActionSheet, $location, ngFB) {
+app.controller('SettingsController', function($scope, $ionicModal, $timeout, $ionicActionSheet, $location, ngFB) {
 	$scope.fbData = window.localStorage['basicFbInfo'];
+
+	$scope.organizer = {
+		checked: false
+	};
+
+	$scope.organizer.checked = false;
+	if(!angular.isUndefined(window.localStorage['event-organizer'])) {
+		if(window.localStorage['event-organizer'] === "true") $scope.organizer.checked = true;
+	}
+
+	$scope.organizerChanged = function() {
+		window.localStorage['event-organizer'] = $scope.organizer.checked;
+	};
 	
 	$scope.showClearAllData = function(show) {
 		var hideSheet = $ionicActionSheet.show({
@@ -23,6 +36,14 @@ app.controller('AccountCtrl', function($scope, $ionicModal, $timeout, $ionicActi
 			hideSheet();
 		}, 4000);
 	};
+});
+
+app.controller('MenuController', function($scope) {
+	$scope.organizer = false;
+
+	if(!angular.isUndefined(window.localStorage['event-organizer'])) {
+		$scope.organizer = window.localStorage['event-organizer'];
+	}
 });
 
 app.controller('IntroController', function($scope, $ionicModal, $timeout, $location, ngFB, fbAccessToken,AccService,EventFeed) {
@@ -96,7 +117,7 @@ app.controller('EventListController', function($scope, $ionicTabsDelegate, $ioni
 		console.log('test');
 	};
 	EventFeed.getAll().success(function(data){
-    $scope.items=data.results;
+    	$scope.items=data.results;
     });
    
 });
@@ -184,6 +205,10 @@ app.controller('FindEventCtrl', function($scope, ngFB, eventDetail, $location, f
 		}
 		
   }
+});
+
+app.controller('ManageOrganizationController', function($scope) {
+	
 });
 
 app.controller('RegisterOrganizationController', function($scope, $http, fbAccessToken, ngFB) {

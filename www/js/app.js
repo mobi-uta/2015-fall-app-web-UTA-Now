@@ -64,22 +64,42 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		}
 	})
 
-	.state('register-organization', {
-		url: '/event-organization',
-		templateUrl: 'templates/organization-register.html',
-		controller: 'RegisterOrganizationController'
+	.state('main.settings', {
+		url: '/settings',
+		views: {
+			'menuContent': {
+				templateUrl: 'templates/settings.html',
+				controller: 'SettingsController'
+			}
+		}
+	})
+
+	.state('main.manage-organization', {
+		url: '/manage',
+		views: {
+			'menuContent': {
+				templateUrl: 'templates/organization-manage.html',
+				controller: 'ManageOrganizationController'
+			}
+		}
+	})
+
+	.state('main.register-organization', {
+		url: '/manage/register',
+		/*templateUrl: 'templates/organization-register.html',
+		controller: 'RegisterOrganizationController'*/
+		views: {
+			'menuContent': {
+				templateUrl: 'templates/organization-register.html',
+				controller: 'RegisterOrganizationController'
+			}
+		}
 	})
 
 	.state('event', {
 		url: '/event/:eventId',
 		templateUrl: 'templates/event-detail.html',
 		controller: 'EventDetailCtrl'
-	})
-
-	.state('settings', {
-		url: '/settings',
-		templateUrl: 'templates/settings.html',
-		controller: 'AccountCtrl'
 	})
 
 	.state('find-event', {
