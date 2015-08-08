@@ -231,9 +231,52 @@ app.controller('RegisterOrganizationController', function($scope, $http, fbAcces
 });
 
 
-app.controller('AddEventCtrl', function($scope, eventDetail) {
-  $scope.event = eventDetail.getEvent();
-  console.log(eventDetail.getEvent());
+app.controller('AddEventCtrl', function($scope, $filter,$ionicPopup,EventFeed) {
+	 $scope.event = {'formattedDate': ''};
+  		$scope.create = function(){
+	  	EventFeed.create({
+	  		eventName:$scope.event.name,
+	  		description:$scope.event.description,
+	  		startDate: $scope.event.startDate.toISOString(),
+	  		endDate:$scope.event.endDate.toISOString()
+	  	}).success(function(data){
+	  		console.log("Created event " + event.startDate)
+	  	})
+	
+	 };
+    $scope.$watch('event.formattedDate', function(unformattedDate) {
+      $scope.event.formattedDate = $filter('date')(unformattedDate, 'dd/MM/yyyy HH:mm');
+    });
+	 $scope.openDatePicker = function(dateType) {
+      $scope.tmp = {};
+      $scope.tmp.newDate = $scope.event.formattedDate;
+ 
+      var eventWhen = $ionicPopup.show({
+        template: '<datetimepicker ng-model="tmp.newDate"></datetimepicker>',
+        title: "Select a date and time",
+        scope: $scope,
+        buttons: [{
+          text: 'Cancel'
+        }, {
+          text: '<b>Select</b>',
+          type: 'button-stable',
+          onTap: function(e) {
+          	if(dateType == "startDate"){
+          		$scope.event.startDate = $scope.tmp.newDate;
+          	}
+            else if (dateType == "endDate"){
+            	$scope.event.endDate = $scope.tmp.newDate;
+            }
+            else{
+            	$scope.formattedDate = $scope.tmp.newDate;
+            	}
+
+          }
+        }]
+      });
+
+};
+
 });
 
 app.controller('PushCtrl', function($scope, $rootScope, $ionicUser, $ionicPush) {

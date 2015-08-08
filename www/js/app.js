@@ -2,7 +2,7 @@
 var app = angular.module('starter', [
 	'ionic', 'ionic.service.core','ionic.service.push', 
 	'starter.controllers', 'starter.services',
-	'ngOpenFB', 'leaflet-directive'
+	'ngOpenFB', 'leaflet-directive','ui.bootstrap.datetimepicker'
 ]);
 
 app.value('fbAccessToken', '');

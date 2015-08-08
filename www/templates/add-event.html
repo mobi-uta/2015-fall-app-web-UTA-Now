@@ -3,25 +3,21 @@
 		<div class="list">
 			<label class="item item-input item-stacked-label">
 				<span class="input-label">Event Name</span>
-				<input type="text" name="name" value="{{ event.name }}">
+				<input type="text"  placeholder='Enter a name'ng-model="event.name"> 
 			</label>
 			<label class="item item-input item-stacked-label">
 				<span class="input-label">Event Description</span>
-				<textarea name="description">{{ event.description }}</textarea>
+				<textarea name="description" placeholder='Enter a description' ng-model='event.description'></textarea>
 			</label>
-			<label class="item item-input item-stacked-label">
-				<span class="input-label">Organizer</span>
-				<input type="text" name="organizer" value="{{ event.owner.name }}">
-			</label>
-			<label class="item item-input item-stacked-label">
-				<span class="input-label">Event Starts</span>
-				<input type="text" name="start_time" value="{{ event.start_time | date:'medium' }}"  disabled>
-			</label>
-			<label class="item item-input item-stacked-label">
-				<span class="input-label">Event Ends</span>
-				<input type="text" name="start_time" value="{{ event.end_time | date:'medium' }}"  disabled>
-			</label>
-			<button class="button button-full button-positive">Add</button>
+			<label class="item item-input item-stacked-label" ng-click="openDatePicker('startDate')">
+	          <span class="input-label">Event Starts</span>
+	          <input type="text" ng-model="event.startDate" placeholder="Tap to select Date & Time">
+	        </label>
+			<label class="item item-input item-stacked-label" ng-click="openDatePicker('endDate')">
+	          <span class="input-label">Event Ends</span>
+	          <input type="text" ng-model="event.endDate" placeholder="Tap to select Date & Time">
+	        </label>
+			<button class="button button-full button-positive" ng-click="create()">Add</button>
 			
 		</div>
 	</ion-content>

@@ -19,23 +19,10 @@
 	<ion-content class="has-tabs">
 		<ion-slide-box show-pager="false" on-slide-changed="tabSlideChange()">
 			<ion-slide>
-				<div class="list card" ng-repeat = "item in items | orderBy: '-createdAt'">
+				<div class="list card" ng-repeat = "item in items | orderBy: '-start_date'">
 					<div class="item item-image"><img src="{{item.imageURL}}"></div>
-					<div class="item">{{item.eventName}} - {{ item.stat_date }}</div>
-				</div>
-			</ion-slide>
-
-			<ion-slide>
-				<div class="list card" ng-repeat = "item in items | orderBy: '-createdAt'">
-					<div class="item item-image"><img src="{{item.imageURL}}"></div>
-					<div class="item">{{item.eventName}}</div>
-				</div>
-			</ion-slide>
-
-			<ion-slide>
-				<div class="list card" ng-repeat = "item in items | orderBy: '-createdAt'">
-					<div class="item item-image"><img src="{{item.imageURL}}"></div>
-					<div class="item">{{item.eventName}}</div>
+					<div class="item">{{item.eventName }}</div>	
+					<div class="item">{{ item.startDate | date:'dd - MMMM - yyyy hh:mm:ss' }} </div>
 				</div>
 			</ion-slide>
 
