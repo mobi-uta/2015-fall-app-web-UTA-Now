@@ -96,10 +96,15 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		}
 	})
 
-	.state('event', {
-		url: '/event/:eventId',
-		templateUrl: 'templates/event-detail.html',
-		controller: 'EventDetailCtrl'
+	.state('main.event', {
+		url: '/event/:eventID',
+		views: {
+			'menuContent': {
+				templateUrl: 'templates/event-detail.html',
+				controller: 'EventDetailCtrl'
+			}
+		}
+		
 	})
 
 	.state('find-event', {

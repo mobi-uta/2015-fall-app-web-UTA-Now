@@ -1,5 +1,5 @@
 <ion-view view-title="UTA Now" hide-back-button="true">
-	<ion-nav-bar class="bar-royal">
+	<ion-nav-bar class="bar-positive">
 		<ion-nav-buttons side="left">
 			<button class="button button-icon button-clear ion-navicon" menu-toggle="left">
 			</button>
@@ -10,23 +10,29 @@
 		</ion-nav-buttons>
 	</ion-nav-bar>
 
+
 	<ion-tabs class="tabs-icon-top tabs-color-active-energized">
 		<ion-tab title="Upcoming" icon-off="ion-tshirt-outline" icon-on="ion-tshirt" on-select="tabSelect(0)"></ion-tab>
 		<ion-tab title="Trending" icon="ion-fireball" on-select="tabSelect(1)"></ion-tab>
 		<ion-tab title="Recommended" icon="ion-beer" on-select="tabSelect(2)"></ion-tab>
 	</ion-tabs>
 
-	<ion-content class="has-tabs">
-		<ion-slide-box show-pager="false" on-slide-changed="tabSlideChange()">
-			<ion-slide>
-				<div class="list card" ng-repeat = "item in items | orderBy: '-start_date'">
-					<div class="item item-image"><img src="{{item.imageURL}}"></div>
-					<div class="item">{{item.eventName }}</div>	
-					<div class="item">{{ item.startDate | date:'dd - MMMM - yyyy hh:mm:ss' }} </div>
-				</div>
-			</ion-slide>
 
-		</ion-slide-box>
+	<ion-content class="has-tabs" >
+				 <ion-refresher on-refresh="doRefresh()">
+                     
+     			 </ion-refresher>
+				<div class="list card" ng-repeat = "item in items | orderBy: '-createdAt'">
+					
+
+					<a class="item item-body" href= "#/main/event">
+
+					<img class = "full-image" ng-src="img/coverimg.jpg" style = "height:200px; padding: 5px 5px 5px 5px;">
+					<h2> {{item.eventName }}</h2>	
+					<p>{{ item.startDate | date:'h:mm a MMMM d, y ' }} </p>
+				</div>
+				</a>
+
 	</ion-content>
 	
 	<!-- BUG: Cannot click though the footerbar -->

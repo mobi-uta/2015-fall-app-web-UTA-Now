@@ -1,6 +1,6 @@
 {
   "name": "UTA-Now",
-  "app_id": "5e0c520a",
+  "app_id": "71460d9e",
   "gulpStartupTasks": [
     "sass",
     "watch"

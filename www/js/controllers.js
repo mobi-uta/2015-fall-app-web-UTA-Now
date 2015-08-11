@@ -98,12 +98,17 @@ app.controller('IntroController', function($scope, $ionicModal, $timeout, $locat
 	};
 });
 
-app.controller('EventListController', function($scope, $ionicTabsDelegate, $ionicSlideBoxDelegate,EventFeed) {
+// events-list.html
+app.controller('EventListController', function($scope,$timeout, $ionicTabsDelegate, $ionicSlideBoxDelegate,EventFeed) {
 	$scope.$on('$ionicView.enter', function(e) {
 
 		/* Store the user's last visit to the app */
 		window.localStorage['lastVisit'] = new Date();
 	});
+
+	$scope.itemClicked = function(){
+		console.log($scope.items);
+	};
 
 	$scope.tabSlideChange = function() {
 		$ionicTabsDelegate.select($ionicSlideBoxDelegate.currentIndex());
@@ -119,6 +124,19 @@ app.controller('EventListController', function($scope, $ionicTabsDelegate, $ioni
 	EventFeed.getAll().success(function(data){
     	$scope.items=data.results;
     });
+
+	$scope.doRefresh = function(){
+		$timeout(function(){
+			 //simulate async response
+			 EventFeed.getAll().success(function(data){
+    			$scope.items=data.results;
+  			  });
+		      //Stop the ion-refresher from spinning
+		      $scope.$broadcast('scroll.refreshComplete');
+		      $scope.$apply()
+
+		  },1000);
+	};
    
 });
 
@@ -231,6 +249,7 @@ app.controller('RegisterOrganizationController', function($scope, $http, fbAcces
 });
 
 
+	// add-event.html 
 app.controller('AddEventCtrl', function($scope, $filter,$ionicPopup,EventFeed) {
 	 $scope.event = {'formattedDate': ''};
   		$scope.create = function(){
@@ -244,6 +263,9 @@ app.controller('AddEventCtrl', function($scope, $filter,$ionicPopup,EventFeed) {
 	  	})
 	
 	 };
+
+
+	 /* format date and time picker pop up */
     $scope.$watch('event.formattedDate', function(unformattedDate) {
       $scope.event.formattedDate = $filter('date')(unformattedDate, 'dd/MM/yyyy HH:mm');
     });
