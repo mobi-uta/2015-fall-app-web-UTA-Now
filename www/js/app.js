@@ -97,7 +97,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	})
 
 	.state('main.event', {
-		url: '/event/:eventID',
+		url: '/event/:id',
 		views: {
 			'menuContent': {
 				templateUrl: 'templates/event-detail.html',

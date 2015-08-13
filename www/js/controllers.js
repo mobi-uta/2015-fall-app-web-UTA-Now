@@ -98,7 +98,7 @@ app.controller('IntroController', function($scope, $ionicModal, $timeout, $locat
 	};
 });
 
-// events-list.html
+//----------------------------Event List load-------------------------------------//
 app.controller('EventListController', function($scope,$timeout, $ionicTabsDelegate, $ionicSlideBoxDelegate,EventFeed) {
 	$scope.$on('$ionicView.enter', function(e) {
 
@@ -153,9 +153,15 @@ app.controller('EventsCtrl', function($scope, Events) {
 
 });
 
-app.controller('EventDetailCtrl', function($scope, $stateParams) {
-	$scope.eventName = "Event Name";
-	$scope.eventInfo = "This is an event information. It will contain all the cool stuffs about the event.";
+app.controller('EventDetailCtrl', function($scope, $stateParams,EventFeed) {
+	var eventID = $stateParams.id;
+
+	EventFeed.get(eventID).success(function(data){
+		$scope.event = data;
+		$scope.name = $scope.event.eventName;
+	    $scope.info = $scope.event.description;
+	});
+	
 	$scope.goingPeopleIdList = [4,5,6,7,10,11,13,34,234,456,5676,2334,322,100,4989];
 
 	$scope.map = {

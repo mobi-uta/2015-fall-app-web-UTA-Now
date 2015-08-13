@@ -25,11 +25,11 @@
 				<div class="list card" ng-repeat = "item in items | orderBy: '-createdAt'">
 					
 
-					<a class="item item-body" href= "#/main/event">
+					<a class="item item-body" href= "#/main/event/{{item.objectId}}">
 
 					<img class = "full-image" ng-src="img/coverimg.jpg" style = "height:200px; padding: 5px 5px 5px 5px;">
-					<h2> {{item.eventName }}</h2>	
-					<p>{{ item.startDate | date:'h:mm a MMMM d, y ' }} </p>
+					<h2> {{item.eventName | uppercase }}</h2>	
+					<p>{{ item.startDate | date:'h:mm a MMMM d, y ' | uppercase}} </p>
 				</div>
 				</a>
 

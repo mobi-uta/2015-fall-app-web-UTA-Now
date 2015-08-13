@@ -1,8 +1,9 @@
 <ion-view view-title="UTA Now">
 	<ion-content>
+
 		<div class="event-top">
 			<img class="event-top__background" src="img/coverimg.jpg">    
-			<h1>{{ eventName }}</h1>
+			<h1>{{ name | uppercase}}</h1>
 		</div>
 		<ul class="list">
 			<li class="item custom-item">
@@ -13,7 +14,7 @@
 			<div class="item item-divider">Event Info</div>
 			<div class="item item-body">
 				<div>
-					{{ eventInfo }}
+					{{ info | uppercase }}
 				</div>
 			</div>
 		</div>
