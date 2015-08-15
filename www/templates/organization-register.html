@@ -8,12 +8,13 @@
 		</div>
 
 		<div class="list">
-			<a class="item item-thumbnail-left item-icon-right" ng-repeat="org in orgs">
+			<a class="item item-thumbnail-left item-icon-right" ng-repeat="org in orgs" href = "#/main/manage/register/{{org.index}}">
 				<img ng-src="{{ org.picture.data.url }}" alt="">
 				<i class="icon ion-checkmark-round royal"></i>
 				<h2>{{ org.name }}</h2>
 				<p>{{ org.about }}</p>
 			</a>
 		</div>
+		<button class="button button-block button-positive">Register</button>
 	</ion-content>
 </ion-view>

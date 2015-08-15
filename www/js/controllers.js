@@ -1,8 +1,5 @@
 var app = angular.module('starter.controllers', ['ngOpenFB']);
 
-
-
-
 app.controller('SettingsController', function($scope, $ionicModal, $timeout, $ionicActionSheet, $location, ngFB) {
 	$scope.fbData = window.localStorage['basicFbInfo'];
 
@@ -38,6 +35,8 @@ app.controller('SettingsController', function($scope, $ionicModal, $timeout, $io
 	};
 });
 
+
+
 app.controller('MenuController', function($scope) {
 	$scope.organizer = false;
 
@@ -46,7 +45,9 @@ app.controller('MenuController', function($scope) {
 	}
 });
 
-app.controller('IntroController', function($scope, $ionicModal, $timeout, $location, ngFB, fbAccessToken,AccService,EventFeed) {
+
+/* -------------------------Login page --------------------------------*/
+app.controller('IntroController', function($scope, $ionicModal, $timeout, $location, sessionService, ngFB, fbAccessToken,AccService,EventFeed) {
 	$scope.fbLogin = function(e) {
 		/* Hide fb and show spinner */
 		$scope.fbLoadingSwap(true, e);
@@ -62,40 +63,35 @@ app.controller('IntroController', function($scope, $ionicModal, $timeout, $locat
 						path: '/me',
 						params: {fields: 'id,name,birthday,email,gender,education'}
 					})
-					.then(function(user) {
-						$scope.fbLoadingSwap(false, e);
+						.then(function(user) {
+							$scope.fbLoadingSwap(false, e);
 
-						/* Store basic FB info */
-						window.localStorage['basicFbInfo'] = JSON.stringify(user);
-						$location.path('events');
+							/* Store basic FB info */
+							sessionService.set('fbInfo',user);
+							$location.path('events');
 
-						/* Generate parse object */
-
-						var pfUser = AccService.newUser(user.name,user.email,accessToken,user.id,user.birthday,user.gender);
-						AccService.checkUser(pfUser);
-
-
-						
-
-					});
-				} else {
+							/* Generate parse user and check if it's already registered */
+							var pfUser = AccService.newUser(user.name,user.email,accessToken,user.id,user.birthday,user.gender);
+							AccService.checkUser(pfUser, user.id);
+						});
+					} 
+					else {
 					/* Stop loading bar */
 					$scope.fbLoadingSwap(false, e);
-				}
-			});
-	};
+								}
+							});
+					};
+				$scope.fbLoadingSwap = function(show, e) {
+					var children = angular.element(e)[0].target.children;
 
-	$scope.fbLoadingSwap = function(show, e) {
-		var children = angular.element(e)[0].target.children;
-
-		if(show) {
-			angular.element(children[0]).removeClass('hide');
-			angular.element(children[1]).addClass('hide');
-		} else {
-			angular.element(children[1]).removeClass('hide');
-			angular.element(children[0]).addClass('hide');
-		}
-	};
+					if(show) {
+						angular.element(children[0]).removeClass('hide');
+						angular.element(children[1]).addClass('hide');
+					} else {
+						angular.element(children[1]).removeClass('hide');
+						angular.element(children[0]).addClass('hide');
+					}
+				};
 });
 
 //----------------------------Event List load-------------------------------------//
@@ -121,9 +117,13 @@ app.controller('EventListController', function($scope,$timeout, $ionicTabsDelega
 	$scope.test = function() {
 		console.log('test');
 	};
+
+	/* load data from parse */
 	EventFeed.getAll().success(function(data){
     	$scope.items=data.results;
     });
+
+	/* reload page */
 
 	$scope.doRefresh = function(){
 		$timeout(function(){
@@ -140,19 +140,8 @@ app.controller('EventListController', function($scope,$timeout, $ionicTabsDelega
    
 });
 
-app.controller('EventsCtrl', function($scope, Events) {
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
 
-	$scope.events = Events.all();
-
-});
-
+/*-------------------- Event page view ---------------------*/
 app.controller('EventDetailCtrl', function($scope, $stateParams,EventFeed) {
 	var eventID = $stateParams.id;
 
@@ -235,47 +224,92 @@ app.controller('ManageOrganizationController', function($scope) {
 	
 });
 
-app.controller('RegisterOrganizationController', function($scope, $http, fbAccessToken, ngFB) {
+app.controller('RegisterOrganizationController', function($scope, $http,sessionService, fbAccessToken, ngFB) {
 	$scope.orgs = [];
 
 	ngFB.api({
 		path: '/me/accounts',
-		params: {fields: 'picture, name, about'}
+		params: {fields: 'picture, name, about, id,emails'}
 	})
 	.then(function(user) {
-		console.log(user);
-		angular.forEach(user.data, function(value, key) {
-			$scope.orgs.push(value);
-		});
+		sessionService.set('fbOrgs',user.data);
+
+		
 	});
 
-	$scope.addOrg = function(){};
+	angular.forEach(sessionService.get('fbOrgs'), function(value) {
+			$scope.orgs.push(value);
+		});
+
+	//add index to each result 
+	for(var i = 0; i< $scope.orgs.length;i++){
+		$scope.orgs[i].index = i;
+	};
+
+	console.log($scope.orgs);
+	$scope.addOrg = function(){
+
+	};
 	
 	$scope.createCustomOrg = function(){};
 });
 
+/*-----------------------Create an organization----------------------*/
+app.controller('SignUpOrgController',function($scope,$stateParams,$http,sessionService,OrgService){
+	var id = $stateParams.id;
+	$scope.org = {};
+	
+	//check if its a custom page or a page from facebook
+	if(id != '')	
+	{
+		var target = sessionService.get('fbOrgs')[id]; // retrieve from local storage
+		$scope.org.name = target.name;
+		$scope.org.email = target.emails;
+	
+	}
+	else
+		console.log('no page info');
+	console.log($scope.org.name,$scope.org.email);
 
-	// add-event.html 
+	
+	$scope.register = function(){
+	  	OrgService.create({
+	  		name: $scope.org.name,
+	  		email: $scope.org.email[id]
+	  	}).success(function(data){
+	  		console.log("Created organization ");
+	  	})
+	
+	 };
+
+});
+
+
+
+/*-------------------------Create event -------------------*/
 app.controller('AddEventCtrl', function($scope, $filter,$ionicPopup,EventFeed) {
-	 $scope.event = {'formattedDate': ''};
-  		$scope.create = function(){
-	  	EventFeed.create({
+	$scope.event = {'formattedDate': ''};
+  	$scope.create = function(){
+		EventFeed.create({
 	  		eventName:$scope.event.name,
 	  		description:$scope.event.description,
 	  		startDate: $scope.event.startDate.toISOString(),
 	  		endDate:$scope.event.endDate.toISOString()
+
 	  	}).success(function(data){
-	  		console.log("Created event " + event.startDate)
+	  		console.log("Created event " + event.startDate);
 	  	})
-	
 	 };
 
 
 	 /* format date and time picker pop up */
     $scope.$watch('event.formattedDate', function(unformattedDate) {
+      
       $scope.event.formattedDate = $filter('date')(unformattedDate, 'dd/MM/yyyy HH:mm');
-    });
-	 $scope.openDatePicker = function(dateType) {
+
+  	});
+
+	$scope.openDatePicker = function(dateType) {
       $scope.tmp = {};
       $scope.tmp.newDate = $scope.event.formattedDate;
  
@@ -307,6 +341,7 @@ app.controller('AddEventCtrl', function($scope, $filter,$ionicPopup,EventFeed) {
 
 });
 
+/*-------------Push notification --------------------*/
 app.controller('PushCtrl', function($scope, $rootScope, $ionicUser, $ionicPush) {
   // Identifies a user with the Ionic User service
   $scope.identifyUser = function() {
@@ -351,9 +386,9 @@ app.controller('PushCtrl', function($scope, $rootScope, $ionicUser, $ionicPush) 
 
   // get device token for testing 
   $rootScope.$on('$cordovaPush:tokenReceived', function(event, data) {
-  alert("Successfully registered token " + data.token);
-  console.log('Ionic Push: Got token ', data.token, data.platform);
-  $scope.token = data.token;
-});
+ 	 alert("Successfully registered token " + data.token);
+  	console.log('Ionic Push: Got token ', data.token, data.platform);
+ 	 $scope.token = data.token;
+	});
 
 });

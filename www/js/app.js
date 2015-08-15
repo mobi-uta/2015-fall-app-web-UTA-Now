@@ -8,7 +8,8 @@ var app = angular.module('starter', [
 app.value('fbAccessToken', '');
 
 app.run(function($ionicPlatform, ngFB, fbAccessToken, $location) {
-	ngFB.init({appId: 1625138201105249, accessToken: fbAccessToken });
+	ngFB.init({appId: 408131292703702
+				, accessToken: fbAccessToken });
 	$ionicPlatform.ready(function() {
 		if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
 			cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -84,6 +85,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		}
 	})
 
+	
 	.state('main.register-organization', {
 		url: '/manage/register',
 		/*templateUrl: 'templates/organization-register.html',
@@ -92,6 +94,15 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			'menuContent': {
 				templateUrl: 'templates/organization-register.html',
 				controller: 'RegisterOrganizationController'
+			}
+		}
+	})
+	.state('main.org-form',{
+		url: '/manage/register/:id',
+		views:{
+			'menuContent':{
+				templateUrl: 'templates/organization-form.html',
+				controller:'SignUpOrgController'
 			}
 		}
 	})
@@ -116,7 +127,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	.state ('org-page',{
 		url: '/organization',
 		templateUrl: 'templates/organization-page.html',
-		controller: 'OrgController'
+		controller: ''
 	})
 
 	.state('add-event', {

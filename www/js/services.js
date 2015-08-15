@@ -14,7 +14,7 @@ app.factory ('AccService', function(){
     newUser: function(name, email, accessToken, id, birthday, gender){
       // Init values
       var pfUser = new ParseUser();
-      pfUser.set('name', name);
+      pfUser.set('username', name);
       pfUser.set('email', email);
       pfUser.set('fbToken', accessToken);
       pfUser.set('fbId', id);
@@ -23,8 +23,9 @@ app.factory ('AccService', function(){
       console.log("login success");
       return pfUser;
     },
-    checkUser: function(pfuser){
+    checkUser: function(pfuser,userid){
       var query = new Parse.Query(ParseUser);
+      query.equalTo('fbId',userid);
       query.find({
               success: function(results) {
                 /* User already exists and update them */
@@ -55,7 +56,72 @@ app.factory ('AccService', function(){
 };
 });
 
+app.factory ('OrgService', ['$http','PARSE_CREDENTIALS',function($http,PARSE_CREDENTIALS){
+  
+  return{
+    getAll: function(){
+      return $http.get('https://api.parse.com/1/classes/Organizations',{
+                headers:{
+                    'X-Parse-Application-Id': PARSE_CREDENTIALS.APP_ID,
+                    'X-Parse-REST-API-Key':PARSE_CREDENTIALS.REST_API_KEY,
+                }
+            });
 
+    },
+    get: function(id){
+      return $http.get('https://api.parse.com/1/classes/Organizations/' +id,{
+                headers:{
+                    'X-Parse-Application-Id': PARSE_CREDENTIALS.APP_ID,
+                    'X-Parse-REST-API-Key':PARSE_CREDENTIALS.REST_API_KEY,
+                }
+            });
+    },
+    create: function(data){
+       return $http.post('https://api.parse.com/1/classes/Organizations',data,{
+                headers:{
+                    'X-Parse-Application-Id': PARSE_CREDENTIALS.APP_ID,
+                    'X-Parse-REST-API-Key':PARSE_CREDENTIALS.REST_API_KEY,
+                    'Content-Type':'application/json'
+                }
+            });
+    },
+    edit:function(id,data){
+            return $http.put('https://api.parse.com/1/classes/Organizations/'+id,data,{
+                headers:{
+                    'X-Parse-Application-Id': PARSE_CREDENTIALS.APP_ID,
+                    'X-Parse-REST-API-Key':PARSE_CREDENTIALS.REST_API_KEY,
+                    'Content-Type':'application/json'
+                }
+            });
+        },
+    delete:function(id){
+        return $http.delete('https://api.parse.com/1/classes/Organizations/'+id,{
+            headers:{
+                'X-Parse-Application-Id': PARSE_CREDENTIALS.APP_ID,
+                'X-Parse-REST-API-Key':PARSE_CREDENTIALS.REST_API_KEY,
+                'Content-Type':'application/json'
+            }
+        });
+    }
+  }
+
+
+
+}]);
+
+app.factory('sessionService',['$http',function($http){
+  return {
+     set:function(key,value){
+     return localStorage.setItem(key,JSON.stringify(value));
+   },
+   get:function(key){
+     return JSON.parse(localStorage.getItem(key));
+   },
+   destroy:function(key){
+     return localStorage.removeItem(key);
+   },
+ };
+}]);
 app.factory ('EventFeed', ['$http','PARSE_CREDENTIALS',function($http,PARSE_CREDENTIALS){
   
   return{
