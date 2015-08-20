@@ -34,7 +34,7 @@ $dark:                            #444 !default;
 
 .tabs-striped .tab-item.tab-item-active {
   border-color: #f58026 !important; }
-
+  
 .intro-buttons {
   position: absolute;
   bottom: 0;

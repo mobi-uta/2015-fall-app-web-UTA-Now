@@ -1,33 +1,44 @@
 var app = angular.module('starter.services', []);
 // initialize parse
 app.value('PARSE_CREDENTIALS',{
-    APP_ID: 'F9BqVIRG5hs1PPUktFM5FGrQ4gnJgGyHZKwTSjiY',
-    REST_API_KEY:'Kna1JhHX4WpRonGOZIMPxQVFLV0ugDQgO4t4OK0D'
+    APP_ID: 'QTsosDznDpOsKeKB1IgS3uxs6j6lsVIlJM00sjQQ',
+    REST_API_KEY:'ZH6jeOj19LEdxiWNH8gO34xilSMw1gVx6LO30iUj'
 });
 
 // Parse user account data
 app.factory ('AccService', function(){
 
   var ParseUser = Parse.Object.extend('Users');
-
+  var pfUser;
   return{
+    setCurrentUser: function(pfuser){
+      return this.pfUser = pfuser;
+    },
+    getCurrentUser: function(){
+      return this.pfUser;
+    },
+
     newUser: function(name, email, accessToken, id, birthday, gender){
       // Init values
-      var pfUser = new ParseUser();
-      pfUser.set('username', name);
-      pfUser.set('email', email);
-      pfUser.set('fbToken', accessToken);
-      pfUser.set('fbId', id);
-      pfUser.set('birthdate', new Date(Date.parse(birthday)));
-      pfUser.set('gender', gender);
+      this.pfUser = new ParseUser();
+      this.pfUser.set('username', name);
+      this.pfUser.set('email', email);
+      this.pfUser.set('fbToken', accessToken);
+      this.pfUser.set('fbId', id);
+      this.pfUser.set('birthdate', new Date(Date.parse(birthday)));
+      this.pfUser.set('gender', gender);
       console.log("login success");
-      return pfUser;
+      return this.pfUser;
     },
+
+
     checkUser: function(pfuser,userid){
       var query = new Parse.Query(ParseUser);
       query.equalTo('fbId',userid);
       query.find({
               success: function(results) {
+
+
                 /* User already exists and update them */
                 if(results.length > 0) {
                   console.log('User already exists');
@@ -51,11 +62,13 @@ app.factory ('AccService', function(){
               },
               error: function(error) {}
             });
-      
-          }
+        }
+
 };
 });
 
+
+// REST API from parse organization 
 app.factory ('OrgService', ['$http','PARSE_CREDENTIALS',function($http,PARSE_CREDENTIALS){
   
   return{
@@ -109,6 +122,8 @@ app.factory ('OrgService', ['$http','PARSE_CREDENTIALS',function($http,PARSE_CRE
 
 }]);
 
+
+// local storage service 
 app.factory('sessionService',['$http',function($http){
   return {
      set:function(key,value){
@@ -122,6 +137,9 @@ app.factory('sessionService',['$http',function($http){
    },
  };
 }]);
+
+
+// REST API from Parse Events
 app.factory ('EventFeed', ['$http','PARSE_CREDENTIALS',function($http,PARSE_CREDENTIALS){
   
   return{

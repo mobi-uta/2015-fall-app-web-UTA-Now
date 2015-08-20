@@ -13,6 +13,26 @@
 /*
 * Styles for blurring image
 */
+.sub-tab-view h3{
+		margin: 1em 0 0.5em 0;
+	color: #343434;
+	font-size: 18px;
+	line-height: 10px;
+	font-weight: normal;
+	text-transform: uppercase;
+	font-family: 'Orienta', sans-serif;
+	letter-spacing: 1px;
+	font-style: italic;
+}
+.sub-tab-view h4{
+	margin: 1em 0 0.5em 0;
+	color: #343434;
+	font-size: 13px;
+	line-height: 5px;
+	font-weight: normal;
+	font-style: bold;
+	font-family: 'Orienta', sans-serif;
+}
 .event-top__background {
     position: absolute;
     top: -50%;

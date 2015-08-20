@@ -10,6 +10,8 @@
     "ionic-service-push": "~0.1.8",
     "angular-bootstrap-datetimepicker": "https://github.com/dalelotts/angular-bootstrap-datetimepicker/archive/0.2.4.tar.gz",
     "moment": "~2.8.3"
+  },
+  "dependencies": {
+    "ionic-service-core": "~0.1.10"
   }
-
 }

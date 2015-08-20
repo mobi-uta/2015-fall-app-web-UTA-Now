@@ -1,4 +1,4 @@
-	Parse.initialize("F9BqVIRG5hs1PPUktFM5FGrQ4gnJgGyHZKwTSjiY", "kFs2almVuiCgRnbrPNyCnpfNCrYshHzn2GvZSnhc");
+	Parse.initialize("QTsosDznDpOsKeKB1IgS3uxs6j6lsVIlJM00sjQQ", "BcSaY5yuCuF3eHbQu9g1IWful8y4eOc9aUMP3mWP");
 var app = angular.module('starter', [
 	'ionic', 'ionic.service.core','ionic.service.push', 
 	'starter.controllers', 'starter.services',
@@ -31,7 +31,7 @@ app.config(['$ionicAppProvider', function($ionicAppProvider) {
   // Identify app
   $ionicAppProvider.identify({
     // The App ID (from apps.ionic.io) for the server
-    app_id: '5e0c520a',
+    app_id: '71460d9e',
     // The public API key all services will use for this app
     api_key: '36c48cd254345d89f5b66f2be2616e3aae5e06fbe44d4598',
     // Set the app to use development pushes
@@ -40,7 +40,7 @@ app.config(['$ionicAppProvider', function($ionicAppProvider) {
 }]);
 
 app.config(function($stateProvider, $urlRouterProvider) {
-
+	
 	$stateProvider
 
 	.state('main', {

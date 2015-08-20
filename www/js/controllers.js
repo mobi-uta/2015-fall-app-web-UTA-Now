@@ -73,6 +73,9 @@ app.controller('IntroController', function($scope, $ionicModal, $timeout, $locat
 							/* Generate parse user and check if it's already registered */
 							var pfUser = AccService.newUser(user.name,user.email,accessToken,user.id,user.birthday,user.gender);
 							AccService.checkUser(pfUser, user.id);
+							AccService.setCurrentUser(pfUser);
+							console.log(AccService.getCurrentUser());
+
 						});
 					} 
 					else {
@@ -246,7 +249,6 @@ app.controller('RegisterOrganizationController', function($scope, $http,sessionS
 		$scope.orgs[i].index = i;
 	};
 
-	console.log($scope.orgs);
 	$scope.addOrg = function(){
 
 	};
@@ -255,7 +257,7 @@ app.controller('RegisterOrganizationController', function($scope, $http,sessionS
 });
 
 /*-----------------------Create an organization----------------------*/
-app.controller('SignUpOrgController',function($scope,$stateParams,$http,sessionService,OrgService){
+app.controller('SignUpOrgController',function($scope,$stateParams,$http,sessionService,AccService,OrgService){
 	var id = $stateParams.id;
 	$scope.org = {};
 	
@@ -269,17 +271,30 @@ app.controller('SignUpOrgController',function($scope,$stateParams,$http,sessionS
 	}
 	else
 		console.log('no page info');
-	console.log($scope.org.name,$scope.org.email);
-
 	
+
+	$scope.pfUser = AccService.getCurrentUser();
+
 	$scope.register = function(){
+
 	  	OrgService.create({
 	  		name: $scope.org.name,
-	  		email: $scope.org.email[id]
+	  		email: $scope.org.email[id],
+	  		admin: [{'fbID':$scope.pfUser.get('fbId')}]
 	  	}).success(function(data){
 	  		console.log("Created organization ");
+	  		console.log($scope.pfUser);
+	  		$scope.pfUser.add('adminOfOrg',data.objectId);
+	  		$scope.pfUser.save(null, {
+                    success: function(pfUser) {
+                      console.log("User updated");
+                    },
+                    error: function(pfUser, error) {
+                    }
+                  });
 	  	})
 	
+
 	 };
 
 });
