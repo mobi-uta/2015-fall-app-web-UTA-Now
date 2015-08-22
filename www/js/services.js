@@ -1,8 +1,8 @@
 var app = angular.module('starter.services', []);
 // initialize parse
 app.value('PARSE_CREDENTIALS',{
-    APP_ID: 'QTsosDznDpOsKeKB1IgS3uxs6j6lsVIlJM00sjQQ',
-    REST_API_KEY:'ZH6jeOj19LEdxiWNH8gO34xilSMw1gVx6LO30iUj'
+    APP_ID: 'F9BqVIRG5hs1PPUktFM5FGrQ4gnJgGyHZKwTSjiY',
+    REST_API_KEY:'Kna1JhHX4WpRonGOZIMPxQVFLV0ugDQgO4t4OK0D'
 });
 
 // Parse user account data

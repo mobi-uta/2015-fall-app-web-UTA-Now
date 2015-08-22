@@ -1,4 +1,4 @@
-	Parse.initialize("QTsosDznDpOsKeKB1IgS3uxs6j6lsVIlJM00sjQQ", "BcSaY5yuCuF3eHbQu9g1IWful8y4eOc9aUMP3mWP");
+	Parse.initialize("F9BqVIRG5hs1PPUktFM5FGrQ4gnJgGyHZKwTSjiY", "kFs2almVuiCgRnbrPNyCnpfNCrYshHzn2GvZSnhc");
 var app = angular.module('starter', [
 	'ionic', 'ionic.service.core','ionic.service.push', 
 	'starter.controllers', 'starter.services',

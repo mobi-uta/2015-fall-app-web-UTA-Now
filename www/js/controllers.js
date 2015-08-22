@@ -235,7 +235,7 @@ app.controller('ManageOrganizationController', function($scope,AccService) {
 		success: function(results){
 			angular.forEach(results,function(value){
 				$scope.orgs.push(value);
-				console.log('succeed: '+ value);
+				console.log('succeed: '+ value.get('name'));
 			});
 		},
 		error: function(error){
