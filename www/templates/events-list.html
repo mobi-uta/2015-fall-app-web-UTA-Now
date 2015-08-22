@@ -12,24 +12,24 @@
 
 
 	<ion-tabs class="tabs-icon-top tabs-background-stable tabs-color-dark tabs-color-active-assertive">
-			<ion-tab title="UPCOMING" icon-off="ion-tshirt-outline" icon-on="ion-tshirt" on-select="tabSelect(0)"></ion-tab>
-			<ion-tab title="TRENDING" icon="ion-fireball" on-select="tabSelect(1)"></ion-tab>
-			<ion-tab title="RECOMMEND" icon="ion-beer" on-select="tabSelect(2)"></ion-tab>
+			<ion-tab title="Upcoming" icon-off="ion-tshirt-outline" icon-on="ion-tshirt" on-select="tabSelect(0)"></ion-tab>
+			<ion-tab title="Trending" icon="ion-fireball" on-select="tabSelect(1)"></ion-tab>
+			<ion-tab title="Recommend" icon="ion-beer" on-select="tabSelect(2)"></ion-tab>
 	</ion-tabs>
 
 	
 
 
-	<ion-content class="has-tabs" scrollbar-y='false'>
-				 <ion-refresher on-refresh="doRefresh()">
+	<ion-content class="has-header has-tabs" scrollbar-y='false'>
+				 <ion-refresher style = 'padding-top: 15px; padding-bottom: 15px;' on-refresh="doRefresh()">
                      
      			 </ion-refresher>
-				<div class="list card" ng-repeat = "item in items | orderBy: '-createdAt'">
+				<div class="list-card"  ng-repeat = "item in items | orderBy: '-createdAt'">
 					
 
 					<a class = 'item item-image' href= "#/main/event/{{item.objectId}}" style="text-decoration:none;">
 						  
-					<img class = "full-image" ng-src="img/coverimg.jpg" style = "height:250px; width: 350; padding: 5px 5px 5px 5px;">
+					<img class = "full-image" ng-src="img/coverimg.jpg" style = "height:230px; width: 280; padding: 10px 20px 10px 20px;">
 					</a>
 
 					<div class = 'sub-tab-view item item-body'>
@@ -37,6 +37,7 @@
 
 						<h3><b> {{item.eventName | uppercase }}</b></h3>					
 					</div>
+
 				</div>
 
 	

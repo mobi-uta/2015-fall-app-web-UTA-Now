@@ -45,7 +45,9 @@ app.config(function($stateProvider, $urlRouterProvider) {
 
 	.state('main', {
 		url: '/main',
+		cache: false,
 		templateUrl: 'templates/sidemenu.html',
+		controller: 'MenuController',
 		abstract: true
 	})
 
@@ -84,8 +86,16 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			}
 		}
 	})
+	.state('main.member-organization',{
+		url: '/member',
+		views:
+		{
+			'menuContent': {
+				templateUrl: 'templates/member-organization.html',
+			}
+		}
 
-	
+	})
 	.state('main.register-organization', {
 		url: '/manage/register',
 		/*templateUrl: 'templates/organization-register.html',

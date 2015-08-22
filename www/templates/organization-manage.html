@@ -1,4 +1,4 @@
-<ion-view view-title="Oranization Admin">
+<ion-view view-title="Manage Organization">
 	<ion-content>
 		<div class="card">
 			<div class="item item-text-wrap">
@@ -6,6 +6,11 @@
 				It looks like you aren't an admin of any organizations, would you like to register one?
 				<button class="button button-block button-positive" ui-sref="main.register-organization">Register</button>
 			</div>
+			<a class="item item-thumbnail-left item-icon-right" ng-repeat="org in orgs">
+				<i class="icon ion-checkmark-round royal"></i>
+				<h2>{{ org.get('name') }}</h2>
+				<p>{{ org.get('email') }}</p>
+			</a>
 		</div>
 		
 	</ion-content>

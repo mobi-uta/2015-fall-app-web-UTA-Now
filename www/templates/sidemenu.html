@@ -1,11 +1,11 @@
-<ion-side-menus enable-menu-with-back-views="false">
+<ion-side-menus cache-view="false">
 	<ion-side-menu-content>
 		<ion-nav-bar class="bar-light">
 			<ion-nav-back-button>
 			</ion-nav-back-button>
 
 			<ion-nav-buttons side="left">
-				<button class="button button-icon button-clear ion-navicon-round" menu-toggle="left">
+				<button class="button button-icon button-clear ion-navicon-round" menu-toggle="left" >
 				</button>
 			</ion-nav-buttons>
 		</ion-nav-bar>
@@ -28,9 +28,16 @@
 				<ion-item nav-clear menu-close  ui-sref="main.settings">
 					Settings
 				</ion-item>
-				<ion-item nav-clear menu-close ui-sref="main.manage-organization" ng-show="{{ organizer }}">
-					Organization Admin
+
+
+				<ion-item nav-clear menu-close ui-sref="main.manage-organization">
+					Manage Organization
 				</ion-item>
+				
+				<ion-item nav-clear menu-close ui-sref="main.member-organization" ng-hide = "checked">
+					My Organization
+				</ion-item>
+
 			</ion-list>
 		</ion-content>
 	</ion-side-menu>

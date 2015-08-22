@@ -1,19 +1,17 @@
 var app = angular.module('starter.controllers', ['ngOpenFB']);
 
-app.controller('SettingsController', function($scope, $ionicModal, $timeout, $ionicActionSheet, $location, ngFB) {
-	$scope.fbData = window.localStorage['basicFbInfo'];
-
+app.controller('SettingsController', function($scope, $ionicModal,sessionService, $timeout, $ionicActionSheet, $location, ngFB) {
+	
 	$scope.organizer = {
 		checked: false
 	};
 
-	$scope.organizer.checked = false;
-	if(!angular.isUndefined(window.localStorage['event-organizer'])) {
-		if(window.localStorage['event-organizer'] === "true") $scope.organizer.checked = true;
-	}
+	sessionService.set('checked',$scope.organizer.checked);
 
 	$scope.organizerChanged = function() {
-		window.localStorage['event-organizer'] = $scope.organizer.checked;
+		
+
+		sessionService.set('checked',$scope.organizer.checked);
 	};
 	
 	$scope.showClearAllData = function(show) {
@@ -37,13 +35,12 @@ app.controller('SettingsController', function($scope, $ionicModal, $timeout, $io
 
 
 
-app.controller('MenuController', function($scope) {
-	$scope.organizer = false;
+app.controller('MenuController', function($scope,sessionService) {
 
-	if(!angular.isUndefined(window.localStorage['event-organizer'])) {
-		$scope.organizer = window.localStorage['event-organizer'];
-	}
-});
+	$scope.checked = sessionService.get('checked');
+
+	
+});	
 
 
 /* -------------------------Login page --------------------------------*/
@@ -74,7 +71,7 @@ app.controller('IntroController', function($scope, $ionicModal, $timeout, $locat
 							var pfUser = AccService.newUser(user.name,user.email,accessToken,user.id,user.birthday,user.gender);
 							AccService.checkUser(pfUser, user.id);
 							AccService.setCurrentUser(pfUser);
-							console.log(AccService.getCurrentUser());
+							console.log(typeof(AccService.getCurrentUser().get('adminOfOrg')));
 
 						});
 					} 
@@ -223,7 +220,29 @@ app.controller('FindEventCtrl', function($scope, ngFB, eventDetail, $location, f
   }
 });
 
-app.controller('ManageOrganizationController', function($scope) {
+
+
+app.controller('ManageOrganizationController', function($scope,AccService) {
+	
+	$scope.pfUser = AccService.getCurrentUser();
+	$scope.orgs = [];
+	
+	//query all organizations 
+	var query = new Parse.Query("Organizations");
+	query.equalTo("admin",$scope.pfUser);
+
+	query.find({
+		success: function(results){
+			angular.forEach(results,function(value){
+				$scope.orgs.push(value);
+				console.log('succeed: '+ value);
+			});
+		},
+		error: function(error){
+			console.log("failed!");
+		}
+	});
+	
 	
 });
 
@@ -275,25 +294,27 @@ app.controller('SignUpOrgController',function($scope,$stateParams,$http,sessionS
 
 	$scope.pfUser = AccService.getCurrentUser();
 
+
+	var ParseOrg = Parse.Object.extend('Organizations');
+	$scope.pfOrg = new ParseOrg();
+
 	$scope.register = function(){
 
-	  	OrgService.create({
-	  		name: $scope.org.name,
-	  		email: $scope.org.email[id],
-	  		admin: [{'fbID':$scope.pfUser.get('fbId')}]
-	  	}).success(function(data){
-	  		console.log("Created organization ");
-	  		console.log($scope.pfUser);
-	  		$scope.pfUser.add('adminOfOrg',data.objectId);
-	  		$scope.pfUser.save(null, {
-                    success: function(pfUser) {
-                      console.log("User updated");
+		$scope.pfOrg.set('name',$scope.org.name);
+		$scope.pfOrg.set('email',$scope.org.email[id]);
+
+		var relation = $scope.pfOrg.relation('admin');
+		relation.add($scope.pfUser);
+
+		$scope.pfOrg.save(null, {
+
+                    success: function(pfOrg) {
+                      console.log("New organization saved");
+                 
                     },
-                    error: function(pfUser, error) {
+                    error: function(pfOrg, error) {
                     }
                   });
-	  	})
-	
 
 	 };
 
