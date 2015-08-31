@@ -1,7 +1,8 @@
-	Parse.initialize("F9BqVIRG5hs1PPUktFM5FGrQ4gnJgGyHZKwTSjiY", "kFs2almVuiCgRnbrPNyCnpfNCrYshHzn2GvZSnhc");
+Parse.initialize("F9BqVIRG5hs1PPUktFM5FGrQ4gnJgGyHZKwTSjiY", "kFs2almVuiCgRnbrPNyCnpfNCrYshHzn2GvZSnhc");
 var app = angular.module('starter', [
 	'ionic', 'ionic.service.core','ionic.service.push', 
-	'starter.controllers', 'starter.services',
+	'controller.base', 'controller.events', 'controller.auth', 'controller.organizer', 
+	'starter.services',
 	'ngOpenFB', 'leaflet-directive','ui.bootstrap.datetimepicker'
 ]);
 
