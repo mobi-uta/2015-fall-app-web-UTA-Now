@@ -2,12 +2,12 @@
 	<ion-content>
 
 		<div class="event-top">
-			<img class="event-top__background" src="img/coverimg.jpg">    
+			<img class="event-top__background" src="img/coverimg.jpg">
 			<h1>{{ name | uppercase}}</h1>
 		</div>
 		<ul class="list">
 			<li class="item">
-				<a class="org-info-button">About Mobi</a>
+        <a class="org-info-button" href = "/#/main/org/{{org['objectId']}}">About {{org['name']}}</a>
 			</li>
 		</ul>
 		<div class="list card">

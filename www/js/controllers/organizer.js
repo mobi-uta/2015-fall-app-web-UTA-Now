@@ -118,3 +118,13 @@ app.controller('MemberOrgController',function($scope,AccService){
 		}
 
 });
+app.controller('orgDetailCtrl', function($scope,sessionService,$stateParams){
+	var id = $stateParams.id;
+
+	angular.forEach(sessionService.get('adminOrg'),function(org){
+		if(org['objectId'] == id)
+			$scope.org = org;
+	});
+
+
+});

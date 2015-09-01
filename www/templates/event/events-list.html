@@ -17,22 +17,26 @@
 	</ion-tabs>
 
 	
-
-
 	<ion-content class="has-header has-tabs" scrollbar-y='false'>
-		<ion-refresher style="padding-top: 15px; padding-bottom: 15px;" on-refresh="doRefresh()"></ion-refresher>
-		<div class="list-card event-list-item"  ng-repeat = "item in items | orderBy: '-createdAt'">
-			<a class="item item-image" href="#/main/event/{{item.objectId}}" style="text-decoration:none;">
-				<img src="img/coverimg.jpg" ng-src="{{ item.imageURL }}" />
-			</a>
+			 <ion-refresher style = 'padding-top: 15px; padding-bottom: 15px;' on-refresh="doRefresh()">
 
-			<div class="item-sub">
-				{{item.eventName | uppercase }}<br>
-				{{ item.startDate | date:'h:mm a MMMM d, y ' | uppercase}}				
+				 </ion-refresher>
+			<div class="list-card event-list-item" ng-show = "isSelect(0)" ng-repeat = "item in items | orderBy: '-createdAt'">
+
+				<event></event>
+
 			</div>
 
-		</div>
-	</ion-content>
+			<div class="list-card event-list-item" ng-show = "isSelect(1)" ng-repeat = "item in items | orderBy: '-updatedAt'">
+				<event></event>
+
+			</div>
+			<div class="list-card event-list-item" ng-show = "isSelect(2)" ng-repeat = "item in items | orderBy: '-updatedAt'">
+				<event></event>
+
+			</div>
+
+</ion-content>
 
 	<ion-footer-bar ng-if="isAndroid" class="fab-footer">
 		<button class="fab button button-icon ion-map map-button"></button>
