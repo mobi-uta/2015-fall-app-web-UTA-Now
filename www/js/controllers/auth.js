@@ -22,16 +22,14 @@ app.controller('IntroController', function($scope, $ionicModal, $timeout, $locat
 
 							/* Store basic FB info */
 							sessionService.set('fbInfo',user);
-							$location.path('events');
+							$location.path('main.events-list');
 
 							/* Generate parse user and check if it's already registered */
 							var pfUser = AccService.newUser(user.name,user.email,accessToken,user.id,user.birthday,user.gender);
 							AccService.checkUser(pfUser, user.id);
 							AccService.setCurrentUser(pfUser);
-							console.log(typeof(AccService.getCurrentUser().get('adminOfOrg')));
-
 						});
-					} 
+					}
 					else {
 					/* Stop loading bar */
 					$scope.fbLoadingSwap(false, e);

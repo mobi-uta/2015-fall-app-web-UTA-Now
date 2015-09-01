@@ -1,7 +1,7 @@
 var app = angular.module('controller.base', ['ngOpenFB']);
 
 app.controller('SettingsController', function($scope, $ionicModal,sessionService, $timeout, $ionicActionSheet, $location, ngFB) {
-	
+
 	$scope.organizer = {
 		checked: false
 	};
@@ -9,11 +9,11 @@ app.controller('SettingsController', function($scope, $ionicModal,sessionService
 	sessionService.set('checked',$scope.organizer.checked);
 
 	$scope.organizerChanged = function() {
-		
+
 
 		sessionService.set('checked',$scope.organizer.checked);
 	};
-	
+
 	$scope.showClearAllData = function(show) {
 		var hideSheet = $ionicActionSheet.show({
 			destructiveText: 'Clear all',
@@ -36,7 +36,7 @@ app.controller('SettingsController', function($scope, $ionicModal,sessionService
 
 app.controller('MenuController', function($scope,sessionService) {
 	$scope.checked = sessionService.get('checked');
-});	
+});
 
 /*-------------Push notification --------------------*/
 app.controller('PushCtrl', function($scope, $rootScope, $ionicUser, $ionicPush) {
@@ -50,7 +50,7 @@ app.controller('PushCtrl', function($scope, $rootScope, $ionicUser, $ionicPush) 
       user.user_id = $ionicUser.generateGUID();
     };
 
-    // Add some metadata // not really needed 
+    // Add some metadata // not really needed
     angular.extend(user, {
       name: 'Nhat',
       bio: 'Asian'
@@ -81,7 +81,7 @@ app.controller('PushCtrl', function($scope, $rootScope, $ionicUser, $ionicPush) 
     });
   };
 
-  // get device token for testing 
+  // get device token for testing
   $rootScope.$on('$cordovaPush:tokenReceived', function(event, data) {
  	 alert("Successfully registered token " + data.token);
   	console.log('Ionic Push: Got token ', data.token, data.platform);
