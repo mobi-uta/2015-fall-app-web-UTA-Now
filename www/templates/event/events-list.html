@@ -18,39 +18,13 @@
 
 	
 	<ion-content class="has-header has-tabs" scrollbar-y='false'>
-			 <ion-refresher style = 'padding-top: 15px; padding-bottom: 15px;' on-refresh="doRefresh()">
+		<ion-refresher style = 'padding-top: 15px; padding-bottom: 15px;' on-refresh="doRefresh()"></ion-refresher>
 
-				 </ion-refresher>
-			<div class="list-card event-list-item" ng-show = "isSelect(0)" ng-repeat = "item in items | orderBy: '-createdAt'">
+		<event ng-show = "isSelect(0)" ng-repeat = "item in items | orderBy: '-createdAt'"></event>
+		<event ng-show = "isSelect(1)" ng-repeat = "item in items | orderBy: '-updatedAt'"></event>
+		<event ng-show = "isSelect(2)" ng-repeat = "item in items | orderBy: '-updatedAt'"></event>
 
-				<event></event>
-
-			</div>
-
-			<div class="list-card event-list-item" ng-show = "isSelect(1)" ng-repeat = "item in items | orderBy: '-updatedAt'">
-				<event></event>
-
-			</div>
-			<div class="list-card event-list-item" ng-show = "isSelect(2)" ng-repeat = "item in items | orderBy: '-updatedAt'">
-				<event></event>
-
-<<<<<<< HEAD:www/templates/events-list.html
-	<ion-content class="has-header has-tabs" scrollbar-y='false'>
-		<ion-refresher style="padding-top: 15px; padding-bottom: 15px;" on-refresh="doRefresh()"></ion-refresher>
-		<div class="list-card event-list-item"  ng-repeat = "item in items | orderBy: '-createdAt'">
-			<a class="item item-image" href="#/main/event/{{item.objectId}}" style="text-decoration:none;">
-				<img src="img/coverimg.jpg" ng-src="{{ item.imageURL }}" />
-			</a>
-
-			<div class="item-sub">
-				<div class="item-event-time">{{item.eventName | uppercase }}</div>
-				<div class="item-event-title"></div>{{ item.startDate | date:'h:mm a MMMM d, y ' | uppercase}}</div>
-				<div class="item-event-location">501 Spanilo</div>
-=======
->>>>>>> e3d5ddb1199e37527f286be3fa845396e625200d:www/templates/event/events-list.html
-			</div>
-
-</ion-content>
+	</ion-content>
 
 	<ion-footer-bar ng-if="isAndroid" class="fab-footer">
 		<button class="fab button button-icon ion-map map-button"></button>

@@ -1,0 +1,13 @@
+<div class="list-card event-list-item">
+	<a class="item item-image" href="#/main/event/{{item.objectId}}" style="text-decoration:none;">
+		<img src="img/coverimg.jpg" ng-src="{{ item.imageURL }}" />
+	</a>
+
+	<div class="event-item-overlay"></div>
+
+	<div class="item-event-sub">
+		<div class="time">{{ item.startDate | date:'h:mm a MMMM d, y '}}</div>
+		<div class="title">{{item.eventName | uppercase }}</div>
+		<div class="location">600 S. Center St. Arlington, Texas</div>
+	</div>
+</div>

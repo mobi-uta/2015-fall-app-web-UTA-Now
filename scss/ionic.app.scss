@@ -1,3 +1,25 @@
+@font-face {
+    font-family: 'Bebas Kai';
+    src: url('../fonts/bebaskai-regular-webfont.eot');
+    src: url('../fonts/bebaskai-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/bebaskai-regular-webfont.woff2') format('woff2'),
+         url('../fonts/bebaskai-regular-webfont.woff') format('woff'),
+         url('../fonts/bebaskai-regular-webfont.ttf') format('truetype'),
+         url('../fonts/bebaskai-regular-webfont.svg#bebas_kairegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+  font-family: 'Avenir-Medium';
+  src: url('../fonts/Avenir-Medium.eot?#iefix') format('embedded-opentype')
+  	   url('../fonts/Avenir-Medium.woff') format('woff')
+  	   url('../fonts/Avenir-Medium.ttf')  format('truetype')
+  	   url('../fonts/Avenir-Medium.svg#Avenir-Medium') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
 /*
 To customize the look and feel of Ionic, you can override the variables
 in ionic's _variables.scss file.
@@ -44,15 +66,36 @@ $energized: #f58026 !default;
 	height: 225px;
 	position: relative;
 
-	.item-sub {
+	.event-item-overlay {
 		position: absolute;
 		left: 0;
 		right: 0;
+		top: 0;
 		bottom: 0;
+		background: rgba(0,0,0,0.45);
 		z-index: 50;
-		background: rgba(0,0,0,0.5);
+	}
+
+	.item-event-sub {
+		position: absolute;
+		left: 20px;
+		right: 20px;
+		bottom: 10px;
+		z-index: 51;
+		font-family: 'Avenir-Medium';
+		//background: rgba(0,0,0,0.5);
 		color: #fff !important;
 		padding: 5px;
+
+		.title {
+			font-family: 'Bebas Kai';
+			font-size: 28px;
+			margin: 6px 0;
+		}
+
+		.time { font-size: 12px; }
+
+		.location { font-size: 14px }
 	}
 }
 

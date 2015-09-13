@@ -9,7 +9,7 @@ app.directive("isLogin",function(){
 app.directive("event",function(){
 	return{
 		restrict: 'E',
-		templateUrl: 'templates/directives/e-list.html'
+		templateUrl: 'templates/directives/event-item.html'
 	};
 
 });
