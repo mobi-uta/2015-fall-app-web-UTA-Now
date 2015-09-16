@@ -1,4 +1,4 @@
-var app = angular.module('controller.events', ['ngOpenFB']);
+var app = angular.module('controller.events', ['ngOpenFB', 'ionic']);
 
 //----------------------------Event List load-------------------------------------//
 app.controller('EventListController', function($scope,$timeout, $ionicTabsDelegate, $ionicSlideBoxDelegate,EventFeed) {
@@ -8,6 +8,7 @@ app.controller('EventListController', function($scope,$timeout, $ionicTabsDelega
 		window.localStorage['lastVisit'] = new Date();
 	});
 
+	$scope.isAndroid = ionic.Platform.isAndroid();
 
 	// Tab switch
 	$scope.isSelect = function(index){
