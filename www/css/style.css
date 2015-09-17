@@ -77,3 +77,58 @@
 	margin-left: 3px;
 }
 
+
+.list-inset{
+	position: relative;
+	padding: 40px 0px;
+	display: block;
+	background-color: rgba(255,255,255, 0.0);
+	margin: 15px 0px 0px 17px;
+	height: 0px;
+}
+
+.android-event-search{
+	margin: 65px 0px 0px 19px;
+	width: 353px;
+}
+
+button.button-filter{
+	position: absolute;
+	right: 21px;
+	width: 70px;
+	font-size: 10px;
+	border: 0px;
+	font-weight: bold;
+	padding: 0px 0px 10px 0px;
+	background-color: rgba(235, 235, 235, 1.0) !important;
+	color: rgba(75, 75, 75, 0.6) !important;
+}
+
+button.android-button-filter{
+	position: absolute;
+	top: 40px;
+	right: 18px;
+	width: 70px;
+	font-size: 10px;
+	border: 0px;
+	font-weight: bold;
+	padding: 0px 0px 10px 0px;
+	background-color: rgba(235, 235, 235, 1.0) !important;
+	color: rgba(75, 75, 75, 0.6) !important;
+}
+
+.item.item-input{
+	padding: 6px;
+	margin: 0px;
+	width: 75%;
+	display: inline-block;
+}
+
+#search-text{
+	margin: 0px 0px 0px 15px;
+	padding: 0px 0px 5px 0px;
+}
+
+
+
+

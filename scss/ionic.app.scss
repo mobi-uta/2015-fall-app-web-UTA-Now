@@ -116,6 +116,10 @@ $energized: #f58026 !default;
 	}
 }
 
+.platform-android #eventSearch{
+	display: none !important;
+}
+
 .platform-android {
 	.has-tabs {
 		margin-top: 40px !important;
@@ -146,6 +150,8 @@ $energized: #f58026 !default;
 			font-size: 22px;
 		}
 	}
+
+
 }
 
 // The path for our ionicons font files, relative to the built CSS in www/css

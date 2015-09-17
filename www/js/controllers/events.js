@@ -1,7 +1,7 @@
 var app = angular.module('controller.events', ['ngOpenFB', 'ionic']);
 
 //----------------------------Event List load-------------------------------------//
-app.controller('EventListController', function($scope,$timeout, $ionicTabsDelegate, $ionicSlideBoxDelegate,EventFeed) {
+app.controller('EventListController', function($scope,$timeout,$ionicPopover,$ionicTabsDelegate,$ionicActionSheet,$ionicSlideBoxDelegate,EventFeed) {
 	$scope.$on('$ionicView.enter', function(e) {
 
 		/* Store the user's last visit to the app */
@@ -9,6 +9,73 @@ app.controller('EventListController', function($scope,$timeout, $ionicTabsDelega
 	});
 
 	$scope.isAndroid = ionic.Platform.isAndroid();
+
+	$scope.doSomething = function(){
+		alert("Clicked that shit!");
+	};
+
+	// .fromTemplate() method
+	var template = '<ion-popover-view><ion-header-bar><h1 class="title">My Popover Title</h1></ion-header-bar><ion-content>Hello!</ion-content></ion-popover-view>';
+
+	$scope.popover = $ionicPopover.fromTemplate(template, {
+		scope: $scope
+	});
+
+	// .fromTemplateURL() method
+	$ionicPopover.fromTemplateUrl('my-popover.html', {
+	    scope: $scope
+	  }).then(function(popover) {
+	    $scope.popover = popover;
+	  });
+	$scope.openPopover = function($event){
+		$scope.popover.show($event);
+	};
+
+	$scope.closePopover = function() {
+	    $scope.popover.hide();
+	  };
+  	
+  	//Cleanup the popover when we're done with it!
+  	$scope.$on('$destroy', function() {
+    	$scope.popover.remove();
+  	});
+  
+  	// Execute action on hide popover
+  	$scope.$on('popover.hidden', function() {
+   		// Execute action
+  	});
+  
+ 	// Execute action on remove popover
+ 	 $scope.$on('popover.removed', function() {
+   		// Execute action
+ 	});
+
+
+	// //Show the action sheet
+	// $scope.show = function(){
+
+	// 	var hideSheet = $ionicActionSheet.show({
+	// 		buttons: [
+	// 			{ text: '<b>Filter 1</b>'},
+	// 			{ text: '<b>Filter 2</b>'}
+	// 		],
+	// 		titleText: 'Title',
+	// 		cancelText: 'Cancel Text',
+	// 		cancel: function(){
+	// 			// add cancel code...
+	// 		},
+	// 		buttonClicked: function(index){
+	// 			return true;
+	// 		}
+	// 	});
+
+	// 	//Hide sheet after 2000 ms
+	// 	// $timeout(function(){
+	// 	// 	hideSheet();
+	// 	// }, 2000);
+	// };
+
+
 
 	// Tab switch
 	$scope.isSelect = function(index){
