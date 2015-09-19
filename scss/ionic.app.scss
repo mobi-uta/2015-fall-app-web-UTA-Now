@@ -45,7 +45,7 @@ $energized: #f58026 !default;
 }
 
 .splash-bg {
-	background: url('../img/splashscreen.jpg'); 
+	background: url('../img/splashscreen.jpg');
 	background-size: cover;
 }
 
@@ -159,4 +159,3 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
-

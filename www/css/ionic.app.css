@@ -89,6 +89,9 @@ $dark:                            #212121;
   .intro-buttons .button-fb {
     background: #0064b1; }
 
+.platform-android #eventSearch {
+  display: none !important; }
+
 .platform-android .has-tabs {
   margin-top: 40px !important;
   bottom: 0 !important; }
