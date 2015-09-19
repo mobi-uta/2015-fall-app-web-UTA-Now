@@ -123,6 +123,7 @@ app.controller('EventListController', function($scope,$timeout,$ionicPopover,$io
 /*-------------------- Event page view ---------------------*/
 app.controller('EventDetailCtrl', function($scope, $stateParams,EventFeed) {
 	var eventID = $stateParams.id;
+	$scope.rsvpText = "I'am going for this event";
 
 	EventFeed.get(eventID).success(function(data){
 		$scope.event = data;
