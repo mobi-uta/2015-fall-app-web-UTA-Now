@@ -1,0 +1,35 @@
+<ion-view  cache-view = "false" view-title="Manage Organization">
+	<ion-content>
+		<div ng-show = "isLogin" class="card">
+			<div  ng-show = "isEmpty" class="item item-text-wrap">
+				<i class="ion-information-circled"></i>
+				It looks like you aren't an admin of any organizations, would you like to register one?
+				<button class="button button-block button-positive" ui-sref="main.register-organization">Register</button>
+			</div>
+			<div ng-show="isCreatedEmpty" class="list" ng-repeat="org in createdOrgs">
+				<div class = "item item-divider">
+				Already Created Organizations
+				</div>
+				<a class="item item-thumbnail-left item-icon-right"  href = "#/main/org/{{org.id}}">
+					<img ng-src="{{ org.picture.data.url }}" alt="">
+					<i class="icon ion-ios-glasses-outline assertive"></i>
+					<h2>{{ org.name }}</h2>
+					<p>{{ org.about }}</p>
+				</a>
+			</div>
+			<div ng-show = "isNotCreatedEmpty"class="list" ng-repeat="org in notCreatedOrgs">
+				<div class = "item item-divider">
+					Not yet created organizations from facebook
+				</div>
+				<a class="item item-thumbnail-left item-icon-right"  href = "#/main/manage/{{org.id}}">
+					<img ng-src="{{ org.picture.data.url }}" alt="">
+					<i class="icon ion-plus-round assertive"></i>
+					<h2>{{ org.name }}</h2>
+					<p>{{ org.about }}</p>
+				</a>
+			</div>
+		</div>
+		<is-login ng-hide = "isLogin"></is-login>
+
+	</ion-content>
+</ion-view>

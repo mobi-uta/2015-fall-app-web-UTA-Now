@@ -77,12 +77,13 @@ $stateProvider
 	}
 })
 
-.state('main.manage-organization', {
+.state('main.admin-organization', {
+	cache: false,
 	url: '/manage',
 	views: {
 		'menuContent': {
-			templateUrl: 'templates/organizer/organization-manage.html',
-			controller: 'ManageOrganizationController'
+			templateUrl: 'templates/organizer/admin-organization.html',
+			controller: 'adminOrgViewController'
 		}
 	}
 })
@@ -97,23 +98,23 @@ $stateProvider
 	}
 
 })
-.state('main.register-organization', {
-	url: '/manage/register',
-	/*templateUrl: 'templates/organization-register.html',
-	controller: 'RegisterOrganizationController'*/
-	views: {
-		'menuContent': {
-			templateUrl: 'templates/organizer/organization-register.html',
-			controller: 'RegisterOrganizationController'
-		}
-	}
-})
-.state('main.org-form',{
-	url: '/manage/register/:id',
+// .state('main.register-organization', {
+// 	url: '/manage/register/:id',
+// 	templateUrl: 'templates/organization-register.html',
+// 	controller: 'RegisterOrganizationController'
+// 	views: {
+// 		'menuContent': {
+// 			templateUrl: 'templates/organizer/organization-register.html',
+// 			controller: 'RegisterOrgController'
+// 		}
+// 	}
+// })
+.state('main.org-register',{
+	url: '/manage/:id',
 	views:{
 		'menuContent':{
-			templateUrl: 'templates/organizer/organization-form.html',
-			controller:'SignUpOrgController'
+			templateUrl: 'templates/organizer/register-organization.html',
+			controller:'RegisterOrgController'
 		}
 	}
 })
