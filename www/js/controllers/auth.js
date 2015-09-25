@@ -28,6 +28,16 @@ app.controller('IntroController', function($scope, $ionicModal, $timeout, $locat
 							var pfUser = AccService.newUser(user.name,user.email,accessToken,user.id,user.birthday,user.gender);
 							AccService.checkUser(pfUser, user.id);
 							AccService.setCurrentUser(pfUser);
+
+							ngFB.api({
+									path: '/me/accounts',
+									params: {fields: 'picture, name, about, id,emails'}
+								})
+								.then(function(user) {
+									sessionService.set('fbOrganizations',user.data);
+								});
+
+							
 						});
 					}
 					else {
