@@ -59,23 +59,24 @@ $dark:                            #212121;
     bottom: 0;
     background: rgba(0, 0, 0, 0.45);
     z-index: 50; }
-  .event-list-item .item-event-sub {
-    position: absolute;
-    left: 20px;
-    right: 20px;
-    bottom: 10px;
-    z-index: 51;
-    font-family: 'Avenir-Medium';
-    color: #fff !important;
-    padding: 5px; }
-    .event-list-item .item-event-sub .title {
-      font-family: 'Bebas Kai';
-      font-size: 28px;
-      margin: 6px 0; }
-    .event-list-item .item-event-sub .time {
-      font-size: 12px; }
-    .event-list-item .item-event-sub .location {
-      font-size: 14px; }
+
+.item-event-sub {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 10px;
+  z-index: 51;
+  font-family: 'Avenir-Medium';
+  color: #fff !important;
+  padding: 5px; }
+  .item-event-sub .title {
+    font-family: 'Bebas Kai';
+    font-size: 28px;
+    margin: 6px 0; }
+  .item-event-sub .time {
+    font-size: 12px; }
+  .item-event-sub .location {
+    font-size: 14px; }
 
 .intro-buttons {
   position: absolute;

@@ -3,11 +3,15 @@
 
 		<div class="event-top">
 			<img class="event-top__background" src="img/coverimg.jpg">
-			<h1>{{ name | uppercase}}</h1>
+            <div class="item-event-sub">
+    			<div class="time">{{ startDate | date:'h:mm a MMMM d, y '}}</div>
+    			<div class="title">{{ name | uppercase }}</div>
+    			<div class="location">600 S. Center St. Arlington, Texas</div>
+    		</div>
 		</div>
 		<ul class="list">
 			<li class="item">
-        <a class="org-info-button" href = "/#/main/org/{{org['objectId']}}">About {{org['name']}}</a>
+        <a class="org-info-button" href="/#/main/org/{{org['objectId']}}">About {{org['name']}}</a>
 			</li>
 		</ul>
 		<div class="list card">
