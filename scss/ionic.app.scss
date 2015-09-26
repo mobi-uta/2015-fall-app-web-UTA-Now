@@ -75,28 +75,28 @@ $energized: #f58026 !default;
 		background: rgba(0,0,0,0.45);
 		z-index: 50;
 	}
+}
 
-	.item-event-sub {
-		position: absolute;
-		left: 20px;
-		right: 20px;
-		bottom: 10px;
-		z-index: 51;
-		font-family: 'Avenir-Medium';
-		//background: rgba(0,0,0,0.5);
-		color: #fff !important;
-		padding: 5px;
+.item-event-sub {
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    bottom: 10px;
+    z-index: 51;
+    font-family: 'Avenir-Medium';
+    //background: rgba(0,0,0,0.5);
+    color: #fff !important;
+    padding: 5px;
 
-		.title {
-			font-family: 'Bebas Kai';
-			font-size: 28px;
-			margin: 6px 0;
-		}
+    .title {
+        font-family: 'Bebas Kai';
+        font-size: 28px;
+        margin: 6px 0;
+    }
 
-		.time { font-size: 12px; }
+    .time { font-size: 12px; }
 
-		.location { font-size: 14px }
-	}
+    .location { font-size: 14px }
 }
 
 .intro-buttons {
