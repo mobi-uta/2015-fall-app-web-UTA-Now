@@ -201,9 +201,26 @@ app.controller('FindEventCtrl', function($scope, ngFB, eventDetail, $location, f
 
 
 
-/*-------------------------Create event -------------------*/
-app.controller('AddEventCtrl', function($scope, $filter,$ionicPopup,EventFeed) {
+/**This allows an admin from an organization to add an event
+*	Regular member cant do dis
+*/
+app.controller('AddEventCtrl', function($stateParams,$scope,AccService, $filter,$ionicPopup,EventFeed) {
 	$scope.event = {'formattedDate': ''};
+
+	var currentUser = AccService.getCurrentUser();
+	var orgId = $stateParams.id;
+	console.log(orgId);
+	var query = Parse.Query("Organizations");
+	console.log(currentUser);
+	query.equalTo("Admins",currentUser);
+	query.find({
+		success: function(results){
+			console.log(results);
+		},
+		error: function(err){
+			console.log(err);
+		}
+	});
   	$scope.create = function(){
 		EventFeed.create({
 	  		eventName:$scope.event.name,

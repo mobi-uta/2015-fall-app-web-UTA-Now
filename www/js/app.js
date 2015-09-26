@@ -146,10 +146,15 @@ $stateProvider
 	}
 })
 
-.state('add-event', {
-	url: '/add-event',
-	templateUrl: 'templates/event/add-event.html',
-	controller: 'AddEventCtrl'
+.state('main.add-event', {
+	url: '/add-event/:id',
+	views:{
+		'menuContent':{
+			templateUrl: 'templates/event/add-event.html',
+			controller: 'AddEventCtrl'
+		}
+	}
+	
 });
 
 $urlRouterProvider.otherwise('/main/events');

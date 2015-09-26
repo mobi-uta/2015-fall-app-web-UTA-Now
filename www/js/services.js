@@ -70,7 +70,7 @@ app.factory ('AccService', function(){
 
 // REST API from parse organization 
 app.factory ('OrgService', ['$http','PARSE_CREDENTIALS',function($http,PARSE_CREDENTIALS){
-  
+
   return{
     getAll: function(){
       return $http.get('https://api.parse.com/1/classes/Organizations',{
@@ -81,6 +81,20 @@ app.factory ('OrgService', ['$http','PARSE_CREDENTIALS',function($http,PARSE_CRE
             });
 
     },
+    getObject: function(){
+      var ParseOrg = Parse.Object.extend('Organizations');
+      var query = new Parse.Query(ParseOrg);
+      query.equalTo('objectId','8JqpLbRUup');
+      query.find({
+        success: function(results){
+            return results;
+        },
+        error: function(error){
+            return error;
+        }
+      })
+
+    }
     get: function(id){
       return $http.get('https://api.parse.com/1/classes/Organizations/' +id,{
                 headers:{
