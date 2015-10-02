@@ -81,7 +81,7 @@ app.factory ('OrgService', ['$http','PARSE_CREDENTIALS',function($http,PARSE_CRE
 
     },
     getOrg: function(){
-      var test;
+     /* var test;
       var parseOrg = Parse.Object.extend('Organizations');
       var query = new Parse.Query(parseOrg);
       query.equalTo('name','MOBI');
@@ -92,7 +92,7 @@ app.factory ('OrgService', ['$http','PARSE_CREDENTIALS',function($http,PARSE_CRE
           // return test;
         }).then(function(result){
           return result;
-        });
+        });*/
      
     },
     getObject: function(){
