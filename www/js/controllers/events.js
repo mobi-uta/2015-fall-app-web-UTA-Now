@@ -131,10 +131,10 @@ app.controller('EventDetailCtrl', function($scope, $stateParams,EventFeed,OrgSer
 		$scope.event = data;
 		$scope.name = $scope.event.eventName;
 	    $scope.info = $scope.event.description;
-	    $scope.orgName = OrgService.getOrg();
-	    console.log(orgName);
 
-	   //	console.log(OrgService.getObject()[0].get('name'));
+	    $scope.orgName = OrgService.getOrg().then(function(payload){
+    		$scope.test = payload[0].get('name');
+    	});
 	});
 
 	$scope.goingPeopleIdList = [4,5,6,7,10,11,13,34,234,456,5676,2334,322,100,4989];
