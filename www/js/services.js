@@ -70,7 +70,6 @@ app.factory ('AccService', function(){
 
 // REST API from parse organization 
 app.factory ('OrgService', ['$http','PARSE_CREDENTIALS',function($http,PARSE_CREDENTIALS){
-
   return{
     getAll: function(){
       return $http.get('https://api.parse.com/1/classes/Organizations',{
@@ -81,20 +80,55 @@ app.factory ('OrgService', ['$http','PARSE_CREDENTIALS',function($http,PARSE_CRE
             });
 
     },
+    getOrg: function(){
+      var test;
+      var parseOrg = Parse.Object.extend('Organizations');
+      var query = new Parse.Query(parseOrg);
+      query.equalTo('name','MOBI');
+      query.find().then(function(results){
+          return results[0].get('name')).saveAsync();
+          // test = results[0].get('name');
+          // console.log(test);
+          // return test;
+        }).then(function(result){
+          return result;
+        });
+     
+    },
     getObject: function(){
       var ParseOrg = Parse.Object.extend('Organizations');
+      // setup query to grab organization object
+      var thisOrg;
       var query = new Parse.Query(ParseOrg);
-      query.equalTo('objectId','8JqpLbRUup');
+      query.equalTo('name','MOBI');
       query.find({
         success: function(results){
+            // when org is found, store it. and setup second query to find an event
+            var organization = results[0];
+            var ParseEvent = Parse.Object.extend('Events');
+            var query2 = new Parse.Query(ParseEvent);
+            var relation = organization.relation('Events');
+
+            query2.equalTo('objectId','hZ62dZqBLe');
+            query2.find({
+              // when an event is found, add org->event relation
+              success:function(results){
+                relation.add(results[0]);
+                organization.save();
+                return results;
+              },
+              error:function(results){
+                alert(results);
+              }
+            })
             return results;
         },
         error: function(error){
             return error;
         }
-      })
-
-    }
+      });
+      return ;
+    },
     get: function(id){
       return $http.get('https://api.parse.com/1/classes/Organizations/' +id,{
                 headers:{
@@ -202,14 +236,6 @@ app.factory ('EventFeed', ['$http','PARSE_CREDENTIALS',function($http,PARSE_CRED
         });
     }
   }
-
-
-
-
-
-
-
-
 }]);
 
   
@@ -219,7 +245,7 @@ app.factory ('EventFeed', ['$http','PARSE_CREDENTIALS',function($http,PARSE_CRED
 app.factory('Events', function() {
   // Might use a resource here that returns a JSON array
 
-  // Some fake testing data
+  // Some fake organizationing data
  var events = [{
     id: 0,
     name: 'Mobi dev meeting',

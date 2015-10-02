@@ -90,7 +90,7 @@ app.controller('EventListController', function($scope,$timeout,$ionicPopover,$io
 	$scope.tabSelect = function(index) {
 		$ionicSlideBoxDelegate.slide(index);
 		$scope.checkedTab = index;
-		console.log($scope.checkedTab);
+		//console.log($scope.checkedTab);
 	};
 
 	$scope.test = function() {
@@ -121,14 +121,20 @@ app.controller('EventListController', function($scope,$timeout,$ionicPopover,$io
 
 
 /*-------------------- Event page view ---------------------*/
-app.controller('EventDetailCtrl', function($scope, $stateParams,EventFeed) {
+app.controller('EventDetailCtrl', function($scope, $stateParams,EventFeed,OrgService) {
 	var eventID = $stateParams.id;
 	$scope.rsvpText = "I'am going for this event";
+
+	$scope.temp = OrgService;
 
 	EventFeed.get(eventID).success(function(data){
 		$scope.event = data;
 		$scope.name = $scope.event.eventName;
 	    $scope.info = $scope.event.description;
+	    $scope.orgName = OrgService.getOrg();
+	    console.log(orgName);
+
+	   //	console.log(OrgService.getObject()[0].get('name'));
 	});
 
 	$scope.goingPeopleIdList = [4,5,6,7,10,11,13,34,234,456,5676,2334,322,100,4989];
